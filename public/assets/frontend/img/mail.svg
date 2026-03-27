@@ -1,0 +1,10 @@
+<svg id="mail_outline-24px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="31.068" height="31.068" viewBox="0 0 31.068 31.068">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#3e7c43"/>
+      <stop offset="1" stop-color="#7ec54f"/>
+    </linearGradient>
+  </defs>
+  <path id="Path_139" data-name="Path 139" d="M0,0H31.068V31.068H0Z" fill="none"/>
+  <path id="Path_140" data-name="Path 140" d="M25.3,4H4.589A2.586,2.586,0,0,0,2.013,6.589L2,22.123a2.6,2.6,0,0,0,2.589,2.589H25.3a2.6,2.6,0,0,0,2.589-2.589V6.589A2.6,2.6,0,0,0,25.3,4Zm0,18.123H4.589V9.178l10.356,6.473L25.3,9.178ZM14.945,13.062,4.589,6.589H25.3Z" transform="translate(0.589 1.178)" fill="url(#linear-gradient)"/>
+</svg>

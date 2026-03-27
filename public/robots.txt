@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /login/
+Disallow: /admin/
+Disallow: /password/reset/
+Disallow: /download/
+Disallow: /newsroom/search/
+Sitemap: https://www.cryptocipheracademy.com/sitemap.xml

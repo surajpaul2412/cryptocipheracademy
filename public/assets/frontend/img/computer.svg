@@ -1,0 +1,24 @@
+<svg id="computer" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="59.567" height="47" viewBox="0 0 59.567 47">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#3e7c43"/>
+      <stop offset="1" stop-color="#7ec54f"/>
+    </linearGradient>
+  </defs>
+  <path id="Path_231" data-name="Path 231" d="M62,41.156V70.008a1.164,1.164,0,0,0,1.163,1.163h42.814a1.163,1.163,0,0,0,1.163-1.163V41.156a1.164,1.164,0,0,0-1.163-1.163H63.16A1.164,1.164,0,0,0,62,41.156Zm2.327,1.163H104.81V68.844H64.323Zm0,0" transform="translate(-54.783 -35.339)" fill="url(#linear-gradient)"/>
+  <path id="Path_232" data-name="Path 232" d="M58.4,38.158h-1.4V4.654A4.659,4.659,0,0,0,52.354,0H7.213A4.659,4.659,0,0,0,2.559,4.654v33.5h-1.4A1.163,1.163,0,0,0,0,39.321v2.124A5.561,5.561,0,0,0,5.555,47h27.99a1.163,1.163,0,0,0,0-2.327H5.555a3.232,3.232,0,0,1-3.228-3.229v-.96H57.24v.96a3.231,3.231,0,0,1-3.228,3.228H42.62a1.163,1.163,0,1,0,0,2.327H54.012a5.561,5.561,0,0,0,5.555-5.555V39.321A1.164,1.164,0,0,0,58.4,38.158Zm-3.723,0H4.886V4.654A2.33,2.33,0,0,1,7.213,2.327H52.354A2.33,2.33,0,0,1,54.68,4.654Zm0,0" fill="url(#linear-gradient)"/>
+  <path id="Path_233" data-name="Path 233" d="M316.687,383.977h0a1.163,1.163,0,1,0,1.164,1.163A1.163,1.163,0,0,0,316.686,383.977Zm0,0" transform="translate(-278.814 -339.304)" fill="url(#linear-gradient)"/>
+  <path id="Path_234" data-name="Path 234" d="M110.259,238.547h-4.6a1.163,1.163,0,1,0,0,2.327h4.6a1.163,1.163,0,1,0,0-2.327Zm0,0" transform="translate(-92.342 -210.794)" fill="url(#linear-gradient)"/>
+  <path id="Path_235" data-name="Path 235" d="M110.259,198.547h-4.6a1.163,1.163,0,0,0,0,2.327h4.6a1.163,1.163,0,1,0,0-2.327Zm0,0" transform="translate(-92.342 -175.448)" fill="url(#linear-gradient)"/>
+  <path id="Path_236" data-name="Path 236" d="M110.259,158.547h-4.6a1.163,1.163,0,0,0,0,2.327h4.6a1.163,1.163,0,1,0,0-2.327Zm0,0" transform="translate(-92.342 -140.101)" fill="url(#linear-gradient)"/>
+  <path id="Path_237" data-name="Path 237" d="M190.259,238.547h-4.6a1.163,1.163,0,1,0,0,2.327h4.6a1.163,1.163,0,1,0,0-2.327Zm0,0" transform="translate(-163.035 -210.794)" fill="url(#linear-gradient)"/>
+  <path id="Path_238" data-name="Path 238" d="M190.259,198.547h-4.6a1.163,1.163,0,1,0,0,2.327h4.6a1.163,1.163,0,0,0,0-2.327Zm0,0" transform="translate(-163.035 -175.448)" fill="url(#linear-gradient)"/>
+  <path id="Path_239" data-name="Path 239" d="M190.259,158.547h-4.6a1.163,1.163,0,1,0,0,2.327h4.6a1.163,1.163,0,0,0,0-2.327Zm0,0" transform="translate(-163.035 -140.101)" fill="url(#linear-gradient)"/>
+  <path id="Path_240" data-name="Path 240" d="M190.259,118.547h-4.6a1.163,1.163,0,1,0,0,2.327h4.6a1.163,1.163,0,0,0,0-2.327Zm0,0" transform="translate(-163.035 -104.755)" fill="url(#linear-gradient)"/>
+  <path id="Path_241" data-name="Path 241" d="M190.259,78.547h-4.6a1.163,1.163,0,1,0,0,2.327h4.6a1.163,1.163,0,0,0,0-2.327Zm0,0" transform="translate(-163.035 -69.409)" fill="url(#linear-gradient)"/>
+  <path id="Path_242" data-name="Path 242" d="M270.259,238.547h-4.6a1.163,1.163,0,0,0,0,2.327h4.6a1.163,1.163,0,1,0,0-2.327Zm0,0" transform="translate(-233.727 -210.794)" fill="url(#linear-gradient)"/>
+  <path id="Path_243" data-name="Path 243" d="M270.259,198.547h-4.6a1.163,1.163,0,0,0,0,2.327h4.6a1.163,1.163,0,0,0,0-2.327Zm0,0" transform="translate(-233.727 -175.448)" fill="url(#linear-gradient)"/>
+  <path id="Path_244" data-name="Path 244" d="M350.259,238.547h-4.6a1.163,1.163,0,0,0,0,2.327h4.6a1.163,1.163,0,1,0,0-2.327Zm0,0" transform="translate(-304.42 -210.794)" fill="url(#linear-gradient)"/>
+  <path id="Path_245" data-name="Path 245" d="M350.259,198.547h-4.6a1.163,1.163,0,0,0,0,2.327h4.6a1.163,1.163,0,0,0,0-2.327Zm0,0" transform="translate(-304.42 -175.448)" fill="url(#linear-gradient)"/>
+  <path id="Path_246" data-name="Path 246" d="M350.259,158.547h-4.6a1.163,1.163,0,0,0,0,2.327h4.6a1.163,1.163,0,0,0,0-2.327Zm0,0" transform="translate(-304.42 -140.101)" fill="url(#linear-gradient)"/>
+</svg>
