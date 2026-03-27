@@ -436,6 +436,191 @@
     .details-link:hover {
         opacity: 0.7;
     }
+
+    @media screen and (min-width: 900px) {
+      body.home-welcome-page {
+        --home-header-height: 18vh;
+        --home-main-height: 72.2vh;
+        --home-panel-height: 68.2vh;
+        --home-banner-height: 34vh;
+        --home-course-height: 26vh;
+        --home-course-card-height: 24vh;
+        --home-links-height: 7vh;
+        --home-pros-scroll-height: 58vh;
+        --home-pros-footer-height: 10vh;
+        --home-footer-height: 9.5vh;
+        min-height: 100vh;
+        overflow: hidden;
+      }
+
+      body.home-welcome-page .home-desktop-header {
+        height: var(--home-header-height) !important;
+        max-height: var(--home-header-height);
+        overflow: hidden;
+      }
+
+      body.home-welcome-page .home-desktop-main {
+        height: var(--home-main-height) !important;
+        max-height: var(--home-main-height);
+        overflow: hidden;
+      }
+
+      body.home-welcome-page .home-primary-panel,
+      body.home-welcome-page .home-form-panel,
+      body.home-welcome-page .home-pros-panel {
+        height: var(--home-panel-height) !important;
+        max-height: var(--home-panel-height);
+        overflow: hidden;
+      }
+
+      body.home-welcome-page .home-hero-banner {
+        height: var(--home-banner-height) !important;
+        max-height: var(--home-banner-height);
+        overflow: hidden;
+      }
+
+      body.home-welcome-page .home-hero-banner-image {
+        height: var(--home-banner-height) !important;
+        object-fit: cover;
+      }
+
+      body.home-welcome-page .home-course-strip,
+      body.home-welcome-page .home-course-carousel {
+        height: var(--home-course-height) !important;
+        max-height: var(--home-course-height);
+        overflow: hidden;
+      }
+
+      body.home-welcome-page .home-course-carousel .slick-list,
+      body.home-welcome-page .home-course-carousel .slick-track,
+      body.home-welcome-page .home-course-carousel .slick-slide,
+      body.home-welcome-page .home-course-carousel .slick-slide > div {
+        height: 100%;
+      }
+
+      body.home-welcome-page .home-course-slide {
+        height: var(--home-course-card-height) !important;
+        max-height: var(--home-course-card-height);
+        overflow: hidden;
+      }
+
+      body.home-welcome-page .course-image {
+        height: min(80px, 8vh);
+      }
+
+      body.home-welcome-page .course-title {
+        font-size: clamp(12px, 0.9vw, 16px);
+        line-height: 1.2;
+        min-height: 2.4em;
+        overflow: hidden;
+      }
+
+      body.home-welcome-page .course-description {
+        font-size: clamp(10px, 0.72vw, 11px);
+        line-height: 1.45;
+        min-height: 4.35em;
+        max-height: 4.35em;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+      }
+
+      body.home-welcome-page .duration,
+      body.home-welcome-page .details-link {
+        font-size: clamp(10px, 0.7vw, 12px);
+      }
+
+      body.home-welcome-page .home-links-block,
+      body.home-welcome-page .home-links-row {
+        height: var(--home-links-height) !important;
+        max-height: var(--home-links-height);
+        overflow: hidden;
+      }
+
+      body.home-welcome-page .home-links-row > div {
+        height: 100%;
+      }
+
+      body.home-welcome-page .home-links-row .border-white > a,
+      body.home-welcome-page .home-links-row .border-white > a > .d-flex {
+        display: flex;
+        align-items: center;
+        height: 100%;
+      }
+
+      body.home-welcome-page .home-pros-scroller {
+        height: var(--home-pros-scroll-height) !important;
+        max-height: var(--home-pros-scroll-height);
+      }
+
+      body.home-welcome-page .home-pros-footer {
+        height: var(--home-pros-footer-height) !important;
+        max-height: var(--home-pros-footer-height);
+        overflow: hidden;
+      }
+
+      body.home-welcome-page .home-desktop-footer {
+        height: var(--home-footer-height) !important;
+        max-height: var(--home-footer-height);
+        overflow: hidden;
+      }
+
+      body.home-welcome-page .home-announcement-bar {
+        height: 5vh;
+        color: red;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      body.home-welcome-page .home-announcement-marquee {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+      }
+
+      body.home-welcome-page .home-announcement-track {
+        display: flex;
+        align-items: center;
+        width: 200%;
+        min-width: 200%;
+        animation: homeAnnouncementScroll 12s linear infinite;
+        will-change: transform;
+      }
+
+      body.home-welcome-page .home-announcement-text {
+        flex: 0 0 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        white-space: nowrap;
+        font-size: clamp(12px, 0.9vw, 16px);
+        font-weight: 700;
+        line-height: 1;
+        text-align: center;
+        padding: 0 12px;
+      }
+
+      @keyframes homeAnnouncementScroll {
+        0% {
+          transform: translateX(0);
+        }
+
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        body.home-welcome-page .home-announcement-track {
+          animation: none;
+          transform: translateX(0);
+        }
+      }
+    }
     </style>
     <!--Schema Markup -->
     <script type=application/ld+json>
@@ -782,9 +967,9 @@
 
   <!--end-->
 </head>
-<body class="bg-theme height-100">
+<body class="bg-theme height-100 home-welcome-page">
     <!-- desktop header -->
-    <section class="container-fluid height-18 mobile-d-none">
+    <section class="container-fluid height-18 mobile-d-none home-desktop-header">
         <div class="row">
             <div class="col-md-3 pr-0">
                 <div class="row" style="border-right: 1px solid transparent;">
@@ -807,7 +992,7 @@
             <div class="col-md-9">
                 <div style="height: 12vh;">
                     <div class="row px-3" style="position: relative;top: 31%;height: 5vh">
-                        <div class="col-md-6 nav-media-col-md-6 pr-0">
+                        <div class="col-md-9 pr-0">
                             {{--<nav class="navbar navbar-expand-lg shadow-none px-0 py-1" style="height: 5vh;">
                               @if($homeNotification->count())
                                 <ul class="navbar-nav ml-auto">
@@ -830,16 +1015,14 @@
                                 </ul>
                               @endif
                             </nav>--}}
-                            <nav class="navbar navbar-expand-lg shadow-none px-0 py-1" style="height: 5vh;justify-content: end;color: red;">
-                              <div class="course-title">New Fast Forward courses added. Go checkout Quickly !!</div>
-                            </nav>
-                        </div>
-                        <div class="col-md-3 nav-media-col-md-3">
-                            <a href="{{url('register')}}">
-                                <div class="number-btn-up height-4" align="center">
-                                    <div class="register">REGISTER NOW 1</div>
+                            <nav class="navbar navbar-expand-lg shadow-none px-0 py-1 home-announcement-bar">
+                              <div class="home-announcement-marquee" aria-label="Latest announcement">
+                                <div class="home-announcement-track">
+                                  <span class="home-announcement-text">New Fast Forward courses added. Go checkout Quickly !!</span>
+                                  <span class="home-announcement-text" aria-hidden="true">New Fast Forward courses added. Go checkout Quickly !!</span>
                                 </div>
-                            </a>
+                              </div>
+                            </nav>
                         </div>
                         <div class="col-md-3 px-0">
                             <a href="{{url('register')}}">
@@ -987,19 +1170,19 @@
           </div>
         </div>
     <!-- body -->
-    <section class="container-fluid height-74">
+    <section class="container-fluid height-74 home-desktop-main">
         <div class="row">
             <!-- main heading content -->
               <div class="col-md-6 media-col-md-6 media-my-4">
-                <div class="slider-header height-68 p-relative">
+                <div class="slider-header height-68 p-relative home-primary-panel">
                   <!-- section 1 -->
-                  <div style="height:34vh;overflow: hidden;">
+                  <div class="home-hero-banner">
                     @if($banners->count())
                       <div class="owl-slider" style="z-index: 1 !important;">
                         <div id="carousel" class="owl-carousel">
                           @foreach($banners as $index => $banner)
                           <div class="item">
-                            <img alt="Banner" src="{{env('image_url')}}/banner/{{$banner->image}}" width="100%" style="height: 34vh;">
+                            <img alt="Banner" class="home-hero-banner-image" src="{{env('image_url')}}/banner/{{$banner->image}}" width="100%">
                           </div>
                           @endforeach
                         </div>
@@ -1008,10 +1191,10 @@
                     @endif
                   </div>
                   <!-- section 2 -->
-                  <div class="d-flex align-items-center" style="height:26vh; overflow:hidden;">
-                    <div class="carousel-home w-100 d-flex align-items-center justify-content-center" style="height:26vh;">
+                  <div class="d-flex align-items-center home-course-strip">
+                    <div class="carousel-home w-100 d-flex align-items-center justify-content-center home-course-carousel">
                       <!-- 1 -->
-                      <div class="card px-1 d-flex align-items-center justify-content-center" style="height:24vh;width:100%;">
+                      <div class="card px-1 d-flex align-items-center justify-content-center home-course-slide" style="width:100%;">
                           <div class="px-0">
                             <span class="badge-date">New Course</span>
                             <div class="course-image">
@@ -1027,7 +1210,7 @@
                             </div>
                           </div>
                       </div>
-                      <div class="card px-1 d-flex align-items-center justify-content-center" style="height:24vh;width:100%;">
+                      <div class="card px-1 d-flex align-items-center justify-content-center home-course-slide" style="width:100%;">
                           <div class="px-0">
                             <span class="badge-date">New Course 2026</span>
                             <div class="course-image">
@@ -1043,7 +1226,7 @@
                             </div>
                           </div>
                       </div>
-                      <div class="card px-1 d-flex align-items-center justify-content-center" style="height:24vh;width:100%;">
+                      <div class="card px-1 d-flex align-items-center justify-content-center home-course-slide" style="width:100%;">
                           <div class="px-0">
                             <span class="badge-date">New Course 2026</span>
                             <div class="course-image">
@@ -1062,8 +1245,8 @@
                     </div>
                   </div>
                   <!-- section 3 -->
-                  <div class="" style="height:7vh;">
-                    <div class="row mx-0 media-mt-4 mobile-d-none" style="height:7vh">
+                  <div class="home-links-block">
+                    <div class="row mx-0 media-mt-4 mobile-d-none home-links-row">
                       <div class="col-md-3 col-6 border-white">
                           <a href="{{url('academy_courses')}}">
                           <div class="d-flex">
@@ -1260,8 +1443,8 @@
             </div>
             <!-- ar rehman -->
             <div class="col-md-2 media-col-md-2 media-mt-4 mobile-d-none">
-                <div class="slider-header p-0">
-                    <div class="px-4 scroll-hide height-58 overflow-y-scroll" align="center">
+                <div class="slider-header p-0 home-pros-panel">
+                    <div class="px-4 scroll-hide height-58 overflow-y-scroll home-pros-scroller" align="center">
                       <div class="ul mt-4">
                         @foreach($pros as $pro)
                         <div class="li mb-3">
@@ -1274,7 +1457,7 @@
                         @endforeach
                       </div>
                     </div>
-                    <div class="border-top px-auto scroll-hide d-block height-10 media-py-3" align="center">
+                    <div class="border-top px-auto scroll-hide d-block height-10 media-py-3 home-pros-footer" align="center">
                         <a class="w-100 cele-btn font-bold px-3 py-2" href="{{url('crypto_celeb')}}">
                             Few Words From The Pros
                         </a>
@@ -1310,7 +1493,7 @@
             </div>
             <!-- admission form -->
             <div class="col-md-4 media-col-md-4 media-my-4">
-                <div class="slider-header height-68 p-relative">
+                <div class="slider-header height-68 p-relative home-form-panel">
                     <div class="height-22p media-pt-20px">
                         <h5 class="font-regular text-dark px-4 font-20 top-5p">Admission Support</h5>
                         <h6 class="font-regular text-dark pl-4 pr-0 font-12 top-13p">Book your studio tour & free counselling session</h6>
@@ -1370,7 +1553,7 @@
         </div>
     </section>
     <!-- footer logos -->
-    <section class="container-fluid border-top footer-shadow mobile-d-none" style="height: 9.5vh;">
+    <section class="container-fluid border-top footer-shadow mobile-d-none home-desktop-footer">
         <img alt="footer" src="{{asset('images/banner/footer.jpeg')}}" width="75%" class="d-block mx-auto pt-1">
     </section>
     <!-- mobile footer -->
