@@ -487,7 +487,7 @@
       <div class="col-md-9 inner-col-md-9 pl-0 marL-27 bg-inner media-pr-0">
         <div class="bg-theme1 inner-navbar mobile-d-none">
             <div class="row px-3 height-5 p-relative top-17p">
-                <div class="col-md-6 nav-media-col-md-6 pr-0">
+                <div class="col-md-9 pr-0">
                     <nav class="navbar navbar-expand-lg shadow-none px-0 py-1 height-5">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item pr-3">
@@ -501,13 +501,6 @@
                             </li>
                         </ul>
                     </nav>
-                </div>
-                <div class="col-md-3 nav-media-col-md-3">
-                    <a href="{{url('register')}}">
-                        <div class="font-bold number-btn-up height-4" align="center">
-                            <div class="register">REGISTER NOW</div>
-                        </div>
-                    </a>
                 </div>
                 <div class="col-md-3 px-0">
                     <a href="{{url('register')}}">
