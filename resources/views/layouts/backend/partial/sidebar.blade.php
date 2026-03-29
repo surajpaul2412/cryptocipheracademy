@@ -158,11 +158,19 @@
                         <span>Newsroom</span>
                     </a>
                 </li>
-                <li class="{{ Request::is('admin/academyCourse') ? 'active' : '' }}">
-                    <a href="{{ route('admin.academyCourse.index') }}">
+                <li class="{{ Request::is('admin/academyCourse*') || Request::is('admin/fastForwardCourse*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.academyCourse.index') }}" class="menu-toggle">
                         <i class="material-icons">star</i>
                         <span>Academy Courses</span>
                     </a>
+                    <ul class="ml-menu">
+                        <li>
+                            <a href="{{ route('admin.academyCourse.index') }}">Main Courses</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.fastForwardCourse.index') }}">Fast Forward Courses</a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="{{ Request::is('admin/productionCourse*') ? 'active' : '' }}">
                     <a href="{{ route('admin.productionCourse.index') }}" class="menu-toggle">

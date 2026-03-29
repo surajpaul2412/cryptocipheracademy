@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\AcademyCourse;
+use App\FastForwardCourse;
 use App\HomeNotification;
 use App\Menu;
 use App\DesktopMenuSection;
@@ -18,10 +19,21 @@ class AcademyCourseController extends Controller
     public function index()
     {
         $academyCourse = AcademyCourse::all();
+        $fastForwardCourses = FastForwardCourse::where('is_active', true)
+            ->orderBy('sort_order')
+            ->latest('id')
+            ->get();
         $homeNotification = HomeNotification::all();
         $menus = Menu::orderBy('sort_by', "asc")->get();
         $desktopMenu = DesktopMenuSection::orderBy('sort_by', "asc")->get();
-        return view('frontend.course', compact('academyCourse','homeNotification','menus','desktopMenu'));
+
+        return view('frontend.course', compact(
+            'academyCourse',
+            'fastForwardCourses',
+            'homeNotification',
+            'menus',
+            'desktopMenu'
+        ));
     }
 
     /**
