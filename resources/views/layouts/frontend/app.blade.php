@@ -57,6 +57,50 @@ $desktopMenu = DesktopMenuSection::orderBy('sort_by', "asc")->get();
     .bg-theme2{
       background-color: #9ccd63;
     }
+    .home-announcement-bar{
+      height: 5vh;
+      color: red;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .home-announcement-marquee{
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+    .home-announcement-track{
+      display: flex;
+      align-items: center;
+      width: 200%;
+      min-width: 200%;
+      animation: homeAnnouncementScroll 12s linear infinite;
+      will-change: transform;
+    }
+    .home-announcement-text{
+      flex: 0 0 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+      font-size: clamp(12px, 0.9vw, 16px);
+      font-weight: 700;
+      line-height: 1;
+      text-align: center;
+      padding: 0 12px;
+    }
+    @keyframes homeAnnouncementScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .home-announcement-track{
+        animation: none;
+        transform: translateX(0);
+      }
+    }
     .try{
       box-shadow: 2px 2px 4px 0px rgba(50,50,50,0.10), -1px -1px 3px 0px rgba(255,255,255,0.8);
         background-image: linear-gradient(to right, #edeef3 , #f4f5f9);
@@ -567,57 +611,13 @@ $desktopMenu = DesktopMenuSection::orderBy('sort_by', "asc")->get();
         <div class="bg-theme1 inner-navbar mobile-d-none">
             <div class="row px-3 height-5 p-relative top-17p">
                 <div class="col-md-9 pr-0">
-                    <nav class="navbar navbar-expand-lg shadow-none px-0 py-1 height-5">
-                      @if($homeNotification->count())
-                        <ul class="navbar-nav ml-auto">
-                          @foreach($homeNotification as $row)
-                            <li class="nav-item pr-2 d-flex">
-                                <div class="nav-link text-black bold" style="font-size: 0.80vw;">{{$row->date}} {{$row->batch}} , 
-                                  <span id="countdown" class="pl-2">
-                                      <span id="timer" style="font-size: 0.80vw;"></span>
-                                  </span>
-                                </div>
-                            </li>
-
-                            @php
-                              $homeNotification1Batch = $row->batch;
-                              $homeNotification1Date = $row->date;
-                            @endphp
-
-                            <!-- <script type="text/javascript">
-                            function updateTimer() {
-                                future = Date.parse("{{$row->batch}} {{$row->date}}, 2023 12:00:00");
-                                now = new Date();
-                                diff = future - now;
-
-                                days = Math.floor(diff / (1000 * 60 * 60 * 24));
-                                hours = Math.floor(diff / (1000 * 60 * 60));
-                                mins = Math.floor(diff / (1000 * 60));
-                                secs = Math.floor(diff / 1000);
-
-                                d = days;
-                                h = hours - days * 24;
-                                m = mins - hours * 60;
-                                s = secs - mins * 60;
-
-                                document.getElementById("timer")
-                                    .innerHTML =
-                                    '<span style="font-size:11px !important;">' + d + '<span>d:</span></span>' +
-                                    // '<span style="font-size:11px !important;">' + h + '<span>h:</span></span>' +
-                                    '<span style="font-size:11px !important;">' + m + '<span>m:</span></span>' +
-                                    '<span style="font-size:11px !important;">' + s + '<span>s</span></span>';
-                            }
-                            setInterval('updateTimer()', 1000);
-                            </script> -->
-                            <li class="nav-item">
-                                <div class="nav-link text-black font-400" style="font-size: 0.80vw;">New Batch Commencing {{$row->batch}}.</div>
-                            </li>
-                            <li class="nav-item">
-                                <div class="nav-link text-black bold" style="font-size: 0.80vw;">Remaining Seats: {{$row->seat}}</div>
-                            </li>
-                          @endforeach
-                        </ul>
-                      @endif
+                    <nav class="navbar navbar-expand-lg shadow-none px-0 py-1 home-announcement-bar">
+                      <div class="home-announcement-marquee" aria-label="Latest announcement">
+                        <div class="home-announcement-track">
+                          <span class="home-announcement-text">New Fast Forward courses added. Go checkout Quickly !!</span>
+                          <span class="home-announcement-text" aria-hidden="true">New Fast Forward courses added. Go checkout Quickly !!</span>
+                        </div>
+                      </div>
                     </nav>
                 </div>
                 <div class="col-md-3 px-0">
@@ -680,45 +680,6 @@ $desktopMenu = DesktopMenuSection::orderBy('sort_by', "asc")->get();
   function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
   }
-</script>
-<!-- timer -->
-<script>
-    $(document).ready(function () {
-        // Dynamically set the target date using PHP variables
-        const batch = `<?php echo $homeNotification1Batch; ?>`; // e.g., "Dec 24"
-        const date = `<?php echo $homeNotification1Date; ?>`;   // e.g., "15"
-        const currentYear = new Date().getFullYear();            // Get the current year
-
-        // Build the target date string
-        const targetDateString = `${date} ${batch} 00:00:00`;
-
-        // Parse the target date
-        const targetDate = new Date(targetDateString).getTime();
-
-        // Update the countdown every second
-        const interval = setInterval(function () {
-            // Get today's date and time
-            const now = new Date().getTime();
-
-            // Find the time difference
-            const distance = targetDate - now;
-
-            // Time calculations for days, hours, minutes, and seconds
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            // Display the result in the timer element
-            $('#timer').text(`${days}d ${hours}h ${minutes}m ${seconds}s`);
-
-            // If the countdown is over, display a message
-            if (distance < 0) {
-                clearInterval(interval);
-                $('#timer').text("The countdown is over!");
-            }
-        }, 1000);
-    });
 </script>
 @yield('script')
 </body>

@@ -27,6 +27,55 @@
     .bg-theme2{
       background-color: #9ccd63;
     }
+    .course-title{
+      font-size: 0.9vw;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .home-announcement-bar{
+      height: 5vh;
+      color: red;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .home-announcement-marquee{
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+    .home-announcement-track{
+      display: flex;
+      align-items: center;
+      width: 200%;
+      min-width: 200%;
+      animation: homeAnnouncementScroll 12s linear infinite;
+      will-change: transform;
+    }
+    .home-announcement-text{
+      flex: 0 0 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+      font-size: clamp(12px, 0.9vw, 16px);
+      font-weight: 700;
+      line-height: 1;
+      text-align: center;
+      padding: 0 12px;
+    }
+    @keyframes homeAnnouncementScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .home-announcement-track{
+        animation: none;
+        transform: translateX(0);
+      }
+    }
     .try{
       box-shadow: 2px 2px 4px 0px rgba(50,50,50,0.10), -1px -1px 3px 0px rgba(255,255,255,0.8);
         background-image: linear-gradient(to right, #edeef3 , #f4f5f9);
@@ -488,18 +537,13 @@
         <div class="bg-theme1 inner-navbar mobile-d-none">
             <div class="row px-3 height-5 p-relative top-17p">
                 <div class="col-md-9 pr-0">
-                    <nav class="navbar navbar-expand-lg shadow-none px-0 py-1 height-5">
-                        <ul class="navbar-nav ml-auto">
-                            <li class="nav-item pr-3">
-                                <div class="nav-link text-black bold font-13">28 days 01:36:14</div>
-                            </li>
-                            <li class="nav-item">
-                                <div class="nav-link text-black font-13 font-400">New Batch Commencing April , 2021.</div>
-                            </li>
-                            <li class="nav-item">
-                                <div class="nav-link text-black bold font-13">Remaining Seats: 8</div>
-                            </li>
-                        </ul>
+                    <nav class="navbar navbar-expand-lg shadow-none px-0 py-1 home-announcement-bar">
+                      <div class="home-announcement-marquee" aria-label="Latest announcement">
+                        <div class="home-announcement-track">
+                          <span class="home-announcement-text">New Fast Forward courses added. Go checkout Quickly !!</span>
+                          <span class="home-announcement-text" aria-hidden="true">New Fast Forward courses added. Go checkout Quickly !!</span>
+                        </div>
+                      </div>
                     </nav>
                 </div>
                 <div class="col-md-3 px-0">

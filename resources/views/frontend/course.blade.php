@@ -16,6 +16,21 @@
             <h1 class="font-regular text-grey2 pl-2 pb-0 font-13 inner-title uppercase">Music Production & Sound Engineering courses</h1>
             <h4 class="font-black text-black font-35 marT-10">Crypto Cipher Academy Courses</h4>
         </div>
+        <!-- tabs and pills -->
+         <div class="row px-3 pb-1">
+            <div class="col-md-12 mt-3 d-flex">
+            <a class="pr-2" href="">
+                <div class="font-regular mb-2 mt-2 page-12-btn">
+                    Main Courses
+                </div>
+            </a>
+            <a class="pr-2" href="">
+                <div class="font-regular mb-2 mt-2 page-12-btn">
+                    Fast Forward Courses
+                </div>
+            </a>
+            </div>
+         </div>
         <!-- content -->
         <div class="row px-3 pb-1">
             @if($academyCourse->count())
