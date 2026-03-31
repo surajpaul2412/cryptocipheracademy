@@ -21,12 +21,12 @@
             <div class="col-md-12 mt-3 d-flex" role="tablist" aria-label="Course categories">
             <a class="pr-2 js-course-tab active" href="#main-courses-pane" data-tab-target="#main-courses-pane" role="tab" aria-controls="main-courses-pane" aria-selected="true">
                 <div class="font-regular mb-2 mt-2 page-12-btn">
-                    Main Courses
+                    Advanced Certificate Programs
                 </div>
             </a>
             <a class="pr-2 js-course-tab" href="#fast-forward-pane" data-tab-target="#fast-forward-pane" role="tab" aria-controls="fast-forward-pane" aria-selected="false">
                 <div class="font-regular mb-2 mt-2 page-12-btn">
-                    Fast Forward Courses
+                    Fast-Track Courses
                 </div>
             </a>
             </div>
@@ -66,13 +66,7 @@
                             <div class="slider-header pt-4 pb-3 px-3">
                                 <div class="row align-items-start">
                                     <div class="col-lg-8 col-md-8 col-12">
-                                        <div class="font-black text-black font-35 uppercase mb-0" style="line-height: 0.95;">Fast Forward:</div>
-                                        <div class="font-black text-black font-35 mb-3" style="line-height: 0.98;">
-                                            {{ $row->heading }}
-                                            @if($row->subheading)
-                                                <span class="font-regular font-20">{{ $row->subheading }}</span>
-                                            @endif
-                                        </div>
+                                        <div class="font-black text-black font-35 mb-2" style="line-height: 0.95;">Fast Forward {{ $row->heading }} {{ $row->subheading }}:</div>
                                         <div class="d-inline-block font-regular font-13 text-black uppercase mb-3" style="padding: 7px 18px; border-radius: 999px; background: linear-gradient(to bottom, #ffffff 0%, #ececf1 100%); box-shadow: 0 4px 12px rgba(16, 24, 40, 0.14);">
                                             {{ $row->badge_text }}
                                         </div>
