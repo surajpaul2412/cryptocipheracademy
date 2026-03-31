@@ -67,8 +67,13 @@
                                 <div class="row align-items-start">
                                     <div class="col-lg-8 col-md-8 col-12">
                                         <div class="font-black text-black font-35 mb-2" style="line-height: 0.95;">Fast Forward {{ $row->heading }} {{ $row->subheading }}:</div>
-                                        <div class="d-inline-block font-regular font-13 text-black uppercase mb-3" style="padding: 7px 18px; border-radius: 999px; background: linear-gradient(to bottom, #ffffff 0%, #ececf1 100%); box-shadow: 0 4px 12px rgba(16, 24, 40, 0.14);">
-                                            {{ $row->badge_text }}
+                                        <div class="mb-3">
+                                            <div class="d-inline-block font-regular font-13 text-black uppercase mr-2 mb-2" style="padding: 7px 18px; border-radius: 999px; background: linear-gradient(to bottom, #ffffff 0%, #ececf1 100%); box-shadow: 0 4px 12px rgba(16, 24, 40, 0.14);">
+                                                {{ $row->badge_text }}
+                                            </div>
+                                            <div class="d-inline-block font-regular font-13 text-black uppercase mb-2" style="padding: 7px 18px; border-radius: 999px; background: linear-gradient(to bottom, #ffffff 0%, #ececf1 100%); box-shadow: 0 4px 12px rgba(16, 24, 40, 0.14);">
+                                                12-17 May 2026 | Delhi
+                                            </div>
                                         </div>
                                         <div class="font-regular text-grey2 font-16 mb-3 pr-md-4" style="line-height: 1.65;">
                                             {!! nl2br(e($row->description)) !!}
