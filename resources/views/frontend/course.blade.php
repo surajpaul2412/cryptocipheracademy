@@ -73,7 +73,7 @@
                                             : 'https://' . $row->website;
                                     }
                                 @endphp
-                                <div class="row align-items-start">
+                                <div class="row align-items-stretch">
                                     <div class="col-lg-8 col-md-8 col-12">
                                         <div class="font-black text-black font-35 mb-2" style="line-height: 0.95;">Fast Forward {{ $row->heading }} {{ $row->subheading }}:</div>
                                         <div class="mb-3">
@@ -130,8 +130,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4 col-md-4 col-12 text-center mt-3 mt-md-0">
-                                        <img src="{{ URL('/') }}/images/fastForwardCourse/{{ $row->image }}" alt="{{ $row->heading }}" style="max-width: 100%; width: 225px; filter: drop-shadow(0 10px 18px rgba(18, 26, 43, 0.18));">
+                                    <div class="col-lg-4 col-md-4 col-12 d-flex justify-content-center mt-3 mt-md-0">
+                                        <div class="w-100 d-flex align-items-center justify-content-center" style="min-height: 100%; height: 100%;">
+                                            <img src="{{ URL('/') }}/images/fastForwardCourse/{{ $row->image }}" alt="{{ $row->heading }}" style="max-width: 100%; width: auto; height: 100%; max-height: 420px; object-fit: contain; object-position: center; filter: drop-shadow(0 10px 18px rgba(18, 26, 43, 0.18));">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
