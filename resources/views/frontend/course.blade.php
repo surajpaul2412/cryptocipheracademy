@@ -64,6 +64,15 @@
                     @forelse($fastForwardCourses as $row)
                         <div class="col-md-12 my-3">
                             <div class="slider-header pt-4 pb-3 px-3">
+                                @php
+                                    $detailUrl = $row->detail_url;
+
+                                    if (!$detailUrl && $row->website) {
+                                        $detailUrl = preg_match('/^https?:\/\//i', $row->website)
+                                            ? $row->website
+                                            : 'https://' . $row->website;
+                                    }
+                                @endphp
                                 <div class="row align-items-start">
                                     <div class="col-lg-8 col-md-8 col-12">
                                         <div class="font-black text-black font-35 mb-2" style="line-height: 0.95;">Fast Forward {{ $row->heading }} {{ $row->subheading }}:</div>
@@ -107,9 +116,18 @@
                                                 <div class="font-regular text-grey2 font-16" style="line-height: 1.45;">{{ $row->fees_text }}</div>
                                             </div>
                                         </div>
-                                        <div class="font-regular text-grey2 font-16 pt-2" style="line-height: 1.55;">
-                                            <div><span class="text-black bold uppercase">Admissions :</span> {{ $row->contact_phone }}</div>
-                                            <div><span class="text-black bold uppercase">Website:</span> {{ $row->website }}</div>
+                                        <div class="row align-items-end pt-2">
+                                            <div class="col-md-8 col-12 font-regular text-grey2 font-16" style="line-height: 1.55;">
+                                                <div><span class="text-black bold uppercase">Admissions :</span> {{ $row->contact_phone }}</div>
+                                                <div><span class="text-black bold uppercase">Website:</span> {{ $row->website }}</div>
+                                            </div>
+                                            <div class="col-md-4 col-12 text-md-right mt-3 mt-md-0">
+                                                <a href="{{ $detailUrl ?: 'javascript:void(0)' }}">
+                                                    <div class="font-regular mb-0 page-12-btn d-inline-block px-4">
+                                                        VIEW DETAILS
+                                                    </div>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col-md-4 col-12 text-center mt-3 mt-md-0">

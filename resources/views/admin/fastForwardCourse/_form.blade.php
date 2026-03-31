@@ -97,6 +97,11 @@
 </div>
 
 <div class="form-group">
+    <label class="text-dark" for="detail_url">Detail page url :</label>
+    <input type="text" class="form-control" name="detail_url" value="{{ old('detail_url', optional($fastForwardCourse)->detail_url) }}"/>
+</div>
+
+<div class="form-group">
     <label class="text-dark" for="image">Card image :</label>
     <input type="file" class="form-control" name="image"/>
     @if($fastForwardCourse && $fastForwardCourse->image)

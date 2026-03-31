@@ -18,6 +18,7 @@ class FastForwardCourse extends Model
         'fees_text',
         'contact_phone',
         'website',
+        'detail_url',
         'image',
         'sort_order',
         'is_active',

@@ -86,6 +86,7 @@ class FastForwardCourseController extends Controller
             'fees_text' => 'required|string|max:255',
             'contact_phone' => 'required|string|max:255',
             'website' => 'required|string|max:255',
+            'detail_url' => 'nullable|string|max:255',
             'sort_order' => 'nullable|integer|min:0',
             'is_active' => 'nullable|boolean',
         ];
