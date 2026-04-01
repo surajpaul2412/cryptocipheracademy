@@ -437,6 +437,10 @@
         opacity: 0.7;
     }
 
+    .home-course-card-content .details-link:not(.home-course-details-link) {
+        display: none;
+    }
+
     @media screen and (min-width: 900px) {
       body.home-welcome-page {
         --home-header-height: 18vh;
@@ -498,14 +502,45 @@
         height: 100%;
       }
 
+      body.home-welcome-page .home-course-carousel .slick-list {
+        margin: 0 -6px;
+      }
+
+      body.home-welcome-page .home-course-carousel .slick-slide {
+        padding: 0 6px;
+        box-sizing: border-box;
+      }
+
       body.home-welcome-page .home-course-slide {
         height: var(--home-course-card-height) !important;
         max-height: var(--home-course-card-height);
         overflow: hidden;
+        padding: 10px 12px !important;
+      }
+
+      body.home-welcome-page .home-course-card-shell {
+        width: 100%;
+        height: 100%;
+      }
+
+      body.home-welcome-page .home-course-card-content {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
       }
 
       body.home-welcome-page .course-image {
-        height: min(80px, 8vh);
+        height: min(82px, 8vh);
+        margin-bottom: 8px;
+        overflow: hidden;
+        border-radius: 10px;
+      }
+
+      body.home-welcome-page .course-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
       }
 
       body.home-welcome-page .course-title {
@@ -513,6 +548,7 @@
         line-height: 1.2;
         min-height: 2.4em;
         overflow: hidden;
+        margin-bottom: 10px;
       }
 
       body.home-welcome-page .course-description {
@@ -529,6 +565,11 @@
       body.home-welcome-page .duration,
       body.home-welcome-page .details-link {
         font-size: clamp(10px, 0.7vw, 12px);
+      }
+
+      body.home-welcome-page .course-footer {
+        margin-top: auto;
+        padding-top: 10px;
       }
 
       body.home-welcome-page .home-links-block,
@@ -1192,24 +1233,44 @@
                   </div>
                   <!-- section 2 -->
                   <div class="d-flex align-items-center home-course-strip">
+                    @php
+                      $homeFastForwardCourses = collect($fastForwardCourses ?? [])->values();
+                      if ($homeFastForwardCourses->count() > 0 && $homeFastForwardCourses->count() < 3) {
+                          $initialHomeFastForwardCourses = $homeFastForwardCourses->values();
+                          while ($homeFastForwardCourses->count() < 3) {
+                              foreach ($initialHomeFastForwardCourses as $fastForwardCourse) {
+                                  $homeFastForwardCourses->push($fastForwardCourse);
+                                  if ($homeFastForwardCourses->count() >= 3) {
+                                      break;
+                                  }
+                              }
+                          }
+                      }
+                    @endphp
                     <div class="carousel-home w-100 d-flex align-items-center justify-content-center home-course-carousel">
-                      <!-- 1 -->
-                      <div class="card px-1 d-flex align-items-center justify-content-center home-course-slide" style="width:100%;">
-                          <div class="px-0">
-                            <span class="badge-date">New Course</span>
+                      @foreach($homeFastForwardCourses as $row)
+                        @php
+                          $courseTitle = trim('Fast Forward ' . $row->heading . ' ' . $row->subheading);
+                          $detailUrl = $row->slug
+                              ? route('fast-forward-courses.show', $row->slug)
+                              : url('/our-courses');
+                        @endphp
+                      <div class="card d-flex align-items-center justify-content-center home-course-slide" style="width:100%;">
+                          <div class="home-course-card-shell">
+                            <div class="home-course-card-content">
                             <div class="course-image">
-                              <img src="{{asset('images/FastforwardMusicProduction.png')}}" width="100%" height="80px">
+                              <img src="{{ URL('/') }}/images/fastForwardCourse/{{ $row->image }}" alt="{{ $courseTitle }}">
                             </div>
-                            <h3 class="course-title mt-2">Fast Forward Music Production</h3>
-                            <p class="course-description">
-                              Create your own beats and tracks from scratch using Ableton Live and Logic Pro.
-                            </p>
+                            <h3 class="course-title">{{ $courseTitle }}</h3>
                             <div class="course-footer">
                               <span class="duration">3 Months</span>
+                              <a href="{{ $detailUrl }}" class="details-link home-course-details-link">DETAILS &rarr;</a>
                               <a href="/our-courses" class="details-link">DETAILS →</a>
                             </div>
                           </div>
+                          </div>
                       </div>
+                      @if(false)
                       <div class="card px-1 d-flex align-items-center justify-content-center home-course-slide" style="width:100%;">
                           <div class="px-0">
                             <span class="badge-date">New Course 2026</span>
@@ -1242,6 +1303,8 @@
                             </div>
                           </div>
                       </div>
+                      @endif
+                      @endforeach
                     </div>
                   </div>
                   <!-- section 3 -->
@@ -1685,6 +1748,7 @@ $(document).ready(function(){
       }
     }]
   });
+  if (false) {
   $('.carousel-home').slick({
     speed: 500,
     slidesToShow: 3,      // 👈 3 cards visible
@@ -1720,6 +1784,56 @@ $(document).ready(function(){
         }
     ]
   });
+  }
+
+  var $homeCarousel = $('.carousel-home');
+  var homeSlideCount = $homeCarousel.find('.home-course-slide').length;
+
+  if ($homeCarousel.length && homeSlideCount) {
+    var homeDesktopSlides = Math.min(3, homeSlideCount);
+    var homeTabletSlides = Math.min(2, homeSlideCount);
+
+    $homeCarousel.slick({
+      speed: 500,
+      slidesToShow: homeDesktopSlides,
+      slidesToScroll: 1,
+      autoplay: homeSlideCount > homeDesktopSlides,
+      autoplaySpeed: 2000,
+      dots: false,
+      arrows: false,
+      infinite: homeSlideCount > homeDesktopSlides,
+      centerMode: false,
+      responsive: [
+          {
+              breakpoint: 1024,
+              settings: {
+                  slidesToShow: homeDesktopSlides,
+                  slidesToScroll: 1,
+                  autoplay: homeSlideCount > homeDesktopSlides,
+                  infinite: homeSlideCount > homeDesktopSlides,
+              }
+          },
+          {
+              breakpoint: 768,
+              settings: {
+                  slidesToShow: homeTabletSlides,
+                  slidesToScroll: 1,
+                  autoplay: homeSlideCount > homeTabletSlides,
+                  infinite: homeSlideCount > homeTabletSlides,
+              }
+          },
+          {
+              breakpoint: 480,
+              settings: {
+                  slidesToShow: 1,
+                  slidesToScroll: 1,
+                  autoplay: homeSlideCount > 1,
+                  infinite: homeSlideCount > 1,
+              }
+          }
+      ]
+    });
+  }
 });
 </script>
 <!-- scroll upwards -->

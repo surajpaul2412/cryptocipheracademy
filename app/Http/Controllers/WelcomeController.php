@@ -10,6 +10,7 @@ use App\Banner;
 use App\HomeContent;
 use App\HomeNotification;
 use App\DesktopMenuSection;
+use App\FastForwardCourse;
 use App\Mail\QueryMail;
 use Mail;
 
@@ -28,7 +29,12 @@ class WelcomeController extends Controller
         $homeContent = HomeContent::all();
         $homeNotification = HomeNotification::first();
         $desktopMenu = DesktopMenuSection::orderBy('sort_by', "asc")->get();
-        return view('welcome', compact('pros','banners','homeContent','homeNotification','menus','desktopMenu'));
+        $fastForwardCourses = FastForwardCourse::where('is_active', true)
+            ->orderBy('sort_order')
+            ->orderBy('id')
+            ->get();
+
+        return view('welcome', compact('pros','banners','homeContent','homeNotification','menus','desktopMenu', 'fastForwardCourses'));
     }
 
     /**
@@ -74,7 +80,12 @@ class WelcomeController extends Controller
         $homeContent = HomeContent::all();
         $homeNotification = HomeNotification::first();
         $desktopMenu = DesktopMenuSection::orderBy('sort_by', "asc")->get();
-        return view('welcome', compact('pros','banners','homeContent','homeNotification','menus','desktopMenu'));
+        $fastForwardCourses = FastForwardCourse::where('is_active', true)
+            ->orderBy('sort_order')
+            ->orderBy('id')
+            ->get();
+
+        return view('welcome', compact('pros','banners','homeContent','homeNotification','menus','desktopMenu', 'fastForwardCourses'));
     }
 
     /**
