@@ -333,6 +333,49 @@ $desktopMenu = DesktopMenuSection::orderBy('sort_by', "asc")->get();
     .section2{
       height: 30vh;
     }
+    .section2 .desktop-menu-accordion-item{
+      padding: 8px 0;
+    }
+    .section2 .desktop-menu-accordion-trigger{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      width: 100%;
+    }
+    .section2 .desktop-menu-accordion-link{
+      flex: 1;
+      min-width: 0;
+    }
+    .section2 .desktop-menu-accordion-button{
+      width: 24px;
+      height: 24px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: #5B5E65;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+    .section2 .desktop-menu-accordion-button:focus{
+      outline: none;
+    }
+    .section2 .desktop-menu-accordion-button:hover{
+      color: #000;
+    }
+    .section2 .desktop-menu-accordion-item.is-open .desktop-menu-accordion-button{
+      transform: rotate(90deg);
+      color: #000;
+    }
+    .section2 .desktop-menu-accordion-submenu{
+      display: none;
+      padding-top: 6px;
+    }
+    .section2 .desktop-menu-accordion-item.is-open .desktop-menu-accordion-submenu{
+      display: table;
+    }
     .section3, .section4,.section6{
       height: 5vh;
     }
@@ -556,23 +599,52 @@ $desktopMenu = DesktopMenuSection::orderBy('sort_by', "asc")->get();
               </div>
               @foreach($desktopMenu as $key => $try1)              
               <div class="col-md-12 pl-13p section{{$key+1}} scroll-hide overflow-y-scroll">
-                @if($try1->desktopMainMenu->count() <= 1)
+                @php
+                  $isAccordionSection = ($key + 1) === 2;
+                @endphp
+                @if($try1->desktopMainMenu->count() <= 1 && !$isAccordionSection)
                   <div style="position: relative;top: 50%;transform: translateY(-50%);">
                 @else
                   <div style="position: relative;">
-                    <div style="position: absolute;top: -20%;right: -28%;">
-                      <div id="lottie-scroll-nudge" style="width:195px; height:280px;"></div>
-                    </div>
                 @endif
                     @foreach($try1->desktopMainMenu as $try2)
-                    <div>
-                      <a class="font-14 text-black pl-2 font-bold" href="{{url('/')}}{{$try2->url}}">{{$try2->name}}</a>
-                      <div class="menu" style="display: table;">
-                        @foreach($try2->desktopSubMenu as $trytry)
-                          <span><a href="{{url('/')}}{{$trytry->url}}">{{$trytry->name}}</a></span>
-                        @endforeach
+                    @if($isAccordionSection)
+                      @php
+                        $submenuId = 'desktop-section2-submenu-' . $try2->id;
+                        $hasSubmenu = $try2->desktopSubMenu->count() > 0;
+                      @endphp
+                      <div class="desktop-menu-accordion-item">
+                        <div class="desktop-menu-accordion-trigger">
+                          <a class="font-14 text-black pl-2 font-bold desktop-menu-accordion-link" href="{{url('/')}}{{$try2->url}}">{{$try2->name}}</a>
+                          @if($hasSubmenu)
+                            <button
+                              type="button"
+                              class="desktop-menu-accordion-button js-desktop-menu-toggle"
+                              aria-expanded="false"
+                              aria-controls="{{ $submenuId }}"
+                            >
+                              <i class="fas fa-angle-right"></i>
+                            </button>
+                          @endif
+                        </div>
+                        @if($hasSubmenu)
+                          <div class="menu desktop-menu-accordion-submenu" id="{{ $submenuId }}" hidden>
+                            @foreach($try2->desktopSubMenu as $trytry)
+                              <span><a href="{{url('/')}}{{$trytry->url}}">{{$trytry->name}}</a></span>
+                            @endforeach
+                          </div>
+                        @endif
                       </div>
-                    </div>
+                    @else
+                      <div>
+                        <a class="font-14 text-black pl-2 font-bold" href="{{url('/')}}{{$try2->url}}">{{$try2->name}}</a>
+                        <div class="menu" style="display: table;">
+                          @foreach($try2->desktopSubMenu as $trytry)
+                            <span><a href="{{url('/')}}{{$trytry->url}}">{{$trytry->name}}</a></span>
+                          @endforeach
+                        </div>
+                      </div>
+                    @endif
                     @endforeach
                   </div>
               </div>
@@ -652,19 +724,6 @@ $desktopMenu = DesktopMenuSection::orderBy('sort_by', "asc")->get();
       </a>
     </div>
 
-
-<script src="https://unpkg.com/lottie-web@5.12.0/build/player/lottie.min.js"></script>
-<script>
-  lottie.loadAnimation({
-    container: document.getElementById('lottie-scroll-nudge'),
-    renderer: 'svg',
-    loop: true,
-    autoplay: true,
-    path: 'images/scroll-nudge.json' // Make sure this path is correct
-  });
-</script>
-
-
 <!-- JQuery -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- Bootstrap tooltips -->
@@ -680,6 +739,51 @@ $desktopMenu = DesktopMenuSection::orderBy('sort_by', "asc")->get();
   function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
   }
+
+  (function () {
+    const toggleButtons = document.querySelectorAll('.js-desktop-menu-toggle');
+
+    if (!toggleButtons.length) {
+      return;
+    }
+
+    toggleButtons.forEach(function (button) {
+      button.addEventListener('click', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const parentItem = button.closest('.desktop-menu-accordion-item');
+        const submenuId = button.getAttribute('aria-controls');
+        const submenu = submenuId ? document.getElementById(submenuId) : null;
+
+        if (!parentItem || !submenu) {
+          return;
+        }
+
+        const isOpen = parentItem.classList.contains('is-open');
+
+        document.querySelectorAll('.section2 .desktop-menu-accordion-item.is-open').forEach(function (openItem) {
+          openItem.classList.remove('is-open');
+          const openButton = openItem.querySelector('.js-desktop-menu-toggle');
+          const openSubmenuId = openButton ? openButton.getAttribute('aria-controls') : null;
+          const openSubmenu = openSubmenuId ? document.getElementById(openSubmenuId) : null;
+
+          if (openButton) {
+            openButton.setAttribute('aria-expanded', 'false');
+          }
+          if (openSubmenu) {
+            openSubmenu.hidden = true;
+          }
+        });
+
+        if (!isOpen) {
+          parentItem.classList.add('is-open');
+          button.setAttribute('aria-expanded', 'true');
+          submenu.hidden = false;
+        }
+      });
+    });
+  })();
 </script>
 @yield('script')
 </body>
