@@ -33,6 +33,7 @@ Route::resource('/live-sound-engineering-course', 'LiveSoundEngineeringControlle
 Route::resource('/music-production-online', 'MusicProductionOnlineController');
 Route::resource('/contact-us', 'ContactController');
 Route::resource('/studio-equipment', 'GalleryController');
+Route::get('/fast-forward-courses/{slug}', 'FastForwardCourseController@show')->name('fast-forward-courses.show');
 Route::resource('/our-courses', 'AcademyCourseController');
 Route::resource('/jobs', 'VacancyController');
 Route::resource('/faq', 'FaqController');

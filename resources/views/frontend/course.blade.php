@@ -14,17 +14,17 @@
         <!-- title -->
         <div class="px-3 pt-4 media-pt-0">
             <h1 class="font-regular text-grey2 pl-2 pb-0 font-13 inner-title uppercase">Music Production & Sound Engineering courses</h1>
-            <h4 class="font-black text-black font-35 marT-10">Crypto Cipher Academy Courses</h4>
+            <h4 id="js-course-page-title" class="font-black text-black font-35 marT-10">Crypto Cipher Academy Courses</h4>
         </div>
         <!-- tabs and pills -->
          <div class="row px-3 pb-1">
             <div class="col-md-12 mt-3 d-flex" role="tablist" aria-label="Course categories">
-            <a class="pr-2 js-course-tab active" href="#main-courses-pane" data-tab-target="#main-courses-pane" role="tab" aria-controls="main-courses-pane" aria-selected="true">
-                <div class="font-regular mb-2 mt-2 page-12-btn">
+            <a class="pr-2 js-course-tab active" href="#main-courses-pane" data-tab-target="#main-courses-pane" data-page-title="Crypto Cipher Academy Courses" role="tab" aria-controls="main-courses-pane" aria-selected="true">
+                <div class="font-regular mb-2 mt-2 page-12-btn" style="width: 220px;">
                     Advanced Certificate Programs
                 </div>
             </a>
-            <a class="pr-2 js-course-tab" href="#fast-forward-pane" data-tab-target="#fast-forward-pane" role="tab" aria-controls="fast-forward-pane" aria-selected="false">
+            <a class="pr-2 js-course-tab" href="#fast-forward-pane" data-tab-target="#fast-forward-pane" data-page-title="Crypto Cipher Fast-Track Courses" role="tab" aria-controls="fast-forward-pane" aria-selected="false">
                 <div class="font-regular mb-2 mt-2 page-12-btn">
                     Fast-Track Courses
                 </div>
@@ -65,13 +65,9 @@
                         <div class="col-md-12 my-3">
                             <div class="slider-header pt-4 pb-3 px-3">
                                 @php
-                                    $detailUrl = $row->detail_url;
-
-                                    if (!$detailUrl && $row->website) {
-                                        $detailUrl = preg_match('/^https?:\/\//i', $row->website)
-                                            ? $row->website
-                                            : 'https://' . $row->website;
-                                    }
+                                    $detailUrl = $row->slug
+                                        ? route('fast-forward-courses.show', $row->slug)
+                                        : 'javascript:void(0)';
                                 @endphp
                                 <div class="row align-items-stretch">
                                     <div class="col-lg-8 col-md-8 col-12">
@@ -81,7 +77,7 @@
                                                 {{ $row->badge_text }}
                                             </div>
                                             <div class="d-inline-block font-regular font-13 text-black uppercase mb-2" style="padding: 7px 18px; border-radius: 999px; background: linear-gradient(to bottom, #ffffff 0%, #ececf1 100%); box-shadow: 0 4px 12px rgba(16, 24, 40, 0.14);">
-                                                12-17 May 2026 | Delhi
+                                                {{ $row->event_badge_text }}
                                             </div>
                                         </div>
                                         <div class="font-regular text-grey2 font-16 mb-3 pr-md-4" style="line-height: 1.65;">
@@ -156,16 +152,23 @@
 @section('script')
 <script>
     $(function () {
+        const pageTitle = $('#js-course-page-title');
+
         $('.js-course-tab').on('click', function (event) {
             event.preventDefault();
 
             const target = $(this).data('tab-target');
+            const nextTitle = $(this).data('page-title');
 
             $('.js-course-tab').removeClass('active').attr('aria-selected', 'false');
             $(this).addClass('active').attr('aria-selected', 'true');
 
             $('#main-courses-pane, #fast-forward-pane').removeClass('show active');
             $(target).addClass('show active');
+
+            if (nextTitle && pageTitle.length) {
+                pageTitle.text(nextTitle);
+            }
         });
     });
 </script>

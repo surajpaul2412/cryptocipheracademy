@@ -10,6 +10,7 @@ class FastForwardCourse extends Model
         'heading',
         'subheading',
         'badge_text',
+        'event_badge_text',
         'description',
         'highlight_text',
         'time_text',
@@ -18,6 +19,8 @@ class FastForwardCourse extends Model
         'fees_text',
         'contact_phone',
         'website',
+        'slug',
+        'detail_content',
         'detail_url',
         'image',
         'sort_order',
@@ -27,4 +30,9 @@ class FastForwardCourse extends Model
     protected $casts = [
         'is_active' => 'boolean',
     ];
+
+    public function sections()
+    {
+        return $this->hasMany(FastForwardCourseSection::class, 'fast_forward_course_id');
+    }
 }

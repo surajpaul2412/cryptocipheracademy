@@ -41,7 +41,8 @@
           <th>Image</th>
           <th>Heading</th>
           <th>Badge</th>
-          <th>Detail Url</th>
+          <th>Event Badge</th>
+          <th>Slug</th>
           <th>Sort</th>
           <th>Status</th>
           <th>Edit</th>
@@ -62,7 +63,8 @@
           @endif
         </td>
         <td>{{ $row->badge_text }}</td>
-        <td>{{ $row->detail_url }}</td>
+        <td>{{ $row->event_badge_text }}</td>
+        <td>{{ $row->slug }}</td>
         <td>{{ $row->sort_order }}</td>
         <td>
           <span class="badge {{ $row->is_active ? 'badge-success' : 'badge-secondary' }}">
