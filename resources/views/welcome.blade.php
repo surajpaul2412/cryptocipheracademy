@@ -437,7 +437,7 @@
         opacity: 0.7;
     }
 
-    .home-course-card-content .details-link:not(.home-course-details-link) {
+    .home-course-card-content .course-footer > a.details-link:not(.home-course-details-link) {
         display: none;
     }
 
@@ -503,24 +503,51 @@
       }
 
       body.home-welcome-page .home-course-carousel .slick-list {
-        margin: 0 -6px;
+        margin: 0 -5px;
+        padding: 1px 0;
+      }
+
+      body.home-welcome-page .home-course-carousel .slick-track {
+        display: flex;
       }
 
       body.home-welcome-page .home-course-carousel .slick-slide {
-        padding: 0 6px;
+        padding: 0 5px;
         box-sizing: border-box;
+      }
+
+      body.home-welcome-page .home-course-carousel .slick-slide > div {
+        display: block;
       }
 
       body.home-welcome-page .home-course-slide {
         height: var(--home-course-card-height) !important;
         max-height: var(--home-course-card-height);
+        display: block !important;
         overflow: hidden;
-        padding: 10px 12px !important;
+        padding: 0 !important;
+        border: 0;
+        background: transparent;
+        box-shadow: none;
       }
 
       body.home-welcome-page .home-course-card-shell {
         width: 100%;
         height: 100%;
+        display: block;
+        color: inherit;
+        text-decoration: none;
+        border-radius: 16px;
+        overflow: hidden;
+        background: linear-gradient(180deg, #ffffff 0%, #f6f8fb 100%);
+        border: 1px solid rgba(22, 31, 45, 0.08);
+        box-shadow: 0 10px 22px rgba(18, 28, 45, 0.08);
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+      }
+
+      body.home-welcome-page .home-course-card-shell:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 28px rgba(18, 28, 45, 0.12);
       }
 
       body.home-welcome-page .home-course-card-content {
@@ -528,27 +555,34 @@
         height: 100%;
         display: flex;
         flex-direction: column;
+        padding: 12px 14px 14px;
+        gap: 10px;
       }
 
       body.home-welcome-page .course-image {
-        height: min(82px, 8vh);
-        margin-bottom: 8px;
+        height: min(108px, 10.4vh);
+        margin-bottom: 0;
         overflow: hidden;
-        border-radius: 10px;
+        border-radius: 12px;
+        background: #eef2f7;
       }
 
       body.home-welcome-page .course-image img {
         width: 100%;
         height: 100%;
         object-fit: cover;
+        object-position: center;
       }
 
       body.home-welcome-page .course-title {
-        font-size: clamp(12px, 0.9vw, 16px);
-        line-height: 1.2;
-        min-height: 2.4em;
+        font-size: clamp(13px, 0.98vw, 18px);
+        line-height: 1.16;
+        min-height: 2.32em;
         overflow: hidden;
-        margin-bottom: 10px;
+        margin-bottom: 0;
+        color: #1f2733;
+        font-weight: 700;
+        letter-spacing: -0.02em;
       }
 
       body.home-welcome-page .course-description {
@@ -564,12 +598,28 @@
 
       body.home-welcome-page .duration,
       body.home-welcome-page .details-link {
-        font-size: clamp(10px, 0.7vw, 12px);
+        font-size: clamp(10px, 0.74vw, 12px);
       }
 
       body.home-welcome-page .course-footer {
         margin-top: auto;
         padding-top: 10px;
+        border-top: 1px solid rgba(22, 31, 45, 0.09);
+      }
+
+      body.home-welcome-page .duration {
+        font-weight: 700;
+        color: #303846;
+      }
+
+      body.home-welcome-page .home-course-details-link {
+        font-weight: 700;
+        color: #1f2733;
+        letter-spacing: 0.14em;
+      }
+
+      body.home-welcome-page .home-course-card-content .course-footer > a.details-link:not(.home-course-details-link) {
+        display: none;
       }
 
       body.home-welcome-page .home-links-block,
@@ -1255,7 +1305,7 @@
                               ? route('fast-forward-courses.show', $row->slug)
                               : url('/our-courses');
                         @endphp
-                      <div class="card d-flex align-items-center justify-content-center home-course-slide" style="width:100%;">
+                      <div class="card home-course-slide" style="width:100%;">
                           <div class="home-course-card-shell">
                             <div class="home-course-card-content">
                             <div class="course-image">
