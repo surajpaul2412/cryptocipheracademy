@@ -30,6 +30,7 @@
                 </div>
             </a>
             </div>
+            </div>
          </div>
         <!-- content -->
         <div class="tab-content px-3 pb-1">

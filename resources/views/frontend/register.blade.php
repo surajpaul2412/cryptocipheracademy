@@ -180,22 +180,19 @@
                                         </div>
                                         <span class="font-regular font-12 text-grey2">Select Course</span>
                                         <div class="mobile-d-grid">
-                                            <span>
-                                                <input type="radio" id="music1" name="course" value="Music Production Course" required>
-                                                <label class="pl-2" for="music1">Music Production Course</label>
-                                            </span>
-                                            <span class="pl-3 media-pl-0">
-                                                <input type="radio" id="music2" name="course" value="Music Production Diploma">
-                                                <label class="pl-2" for="music2">Music Production Diploma</label>
-                                            </span>
-                                            <span class="pl-3 media-pl-0">
-                                                <input type="radio" id="music3" name="course" value="Sound Engineering Diploma">
-                                                <label class="pl-2" for="music3">Sound Engineering Diploma</label>
-                                            </span>
-                                            <span class="pl-0 media-pl-0">
-                                                <input type="radio" id="music4" name="course" value="Live Sound Engineering">
-                                                <label class="pl-2" for="music4">Live Sound Engineering</label>
-                                            </span>
+                                            @foreach($courseOptions as $courseOption)
+                                                <span class="{{ $loop->first ? '' : 'pl-3 media-pl-0' }}">
+                                                    <input
+                                                        type="radio"
+                                                        id="{{ $courseOption['id'] }}"
+                                                        name="course"
+                                                        value="{{ $courseOption['value'] }}"
+                                                        {{ old('course') === $courseOption['value'] ? 'checked' : '' }}
+                                                        {{ $loop->first ? 'required' : '' }}
+                                                    >
+                                                    <label class="pl-2" for="{{ $courseOption['id'] }}">{{ $courseOption['label'] }}</label>
+                                                </span>
+                                            @endforeach
                                             @error('course')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -204,21 +201,21 @@
                                         </div>
                                         <span class="font-regular font-12 text-grey2">Batch Commencement</span>
                                         <div class="mobile-d-grid">
-                                            @php
-                                                $homeNotification = $homeNotification->first();
-                                            @endphp
-                                            <span>
-                                                <input type="radio" id="april" name="batch" value="{{$homeNotification->register_date1}}" required>
-                                                <label class="pl-2" for="april">{{$homeNotification->register_date1}}</label>
-                                            </span>
-                                            <span class="pl-3 media-pl-0">
-                                                <input type="radio" id="may" name="batch" value="{{$homeNotification->register_date2}}">
-                                                <label class="pl-2" for="may">{{$homeNotification->register_date2}}</label>
-                                            </span>
-                                            <span class="pl-3 media-pl-0">
-                                                <input type="radio" id="jun" name="batch" value="{{$homeNotification->register_date3}}">
-                                                <label class="pl-2" for="jun">{{$homeNotification->register_date3}}</label>
-                                            </span>
+                                            @forelse($batchOptions as $batchOption)
+                                                <span class="{{ $loop->first ? '' : 'pl-3 media-pl-0' }}">
+                                                    <input
+                                                        type="radio"
+                                                        id="batch_{{ $loop->index }}"
+                                                        name="batch"
+                                                        value="{{ $batchOption }}"
+                                                        {{ old('batch') === $batchOption ? 'checked' : '' }}
+                                                        {{ $loop->first ? 'required' : '' }}
+                                                    >
+                                                    <label class="pl-2" for="batch_{{ $loop->index }}">{{ $batchOption }}</label>
+                                                </span>
+                                            @empty
+                                                <div class="font-regular text-grey2 font-13 pt-2">Batch dates will be updated soon.</div>
+                                            @endforelse
                                             @error('batch')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -230,7 +227,7 @@
                                         <!-- upload image -->
                                         <div class="avatar-upload">
                                             <div class="avatar-edit">
-                                                <input type='file' id="imageUpload" name="profile_image"/>
+                                                <input type='file' id="imageUpload" name="profile_image" accept="image/*"/>
                                                 <label for="imageUpload"><i class="fa fa-upload"></i></label>
                                             </div>
                                             <div class="avatar-preview">
@@ -238,6 +235,11 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        @error('profile_image')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <!-- Student Details -->
@@ -253,7 +255,7 @@
                                 </div>
                                 <!-- phone number -->
                                 <div class="md-form mt-0 w-100">
-                                    <input type="number" class="form-control" name="phone" required value="{{ old('phone') }}">
+                                    <input type="tel" class="form-control" name="phone" required value="{{ old('phone') }}">
                                     <label>Phone Number</label>
                                     @error('phone')
                                         <span class="invalid-feedback" role="alert">
@@ -353,11 +355,11 @@
                                 <h5 class="font-medium text-black font-14 pt-3">GST Information</h5>
                                 <div>
                                     <span>
-                                        <input type="radio" id="yes" name="gst" value="0">
+                                        <input type="radio" id="yes" name="gst" value="0" {{ old('gst') === '0' ? 'checked' : '' }}>
                                         <label class="pl-2" for="yes">Applicable</label>
                                     </span>
                                     <span class="pl-3">
-                                        <input type="radio" id="no" name="gst" value="1" required>
+                                        <input type="radio" id="no" name="gst" value="1" required {{ old('gst', '1') === '1' ? 'checked' : '' }}>
                                         <label class="pl-2" for="no">Not Applicable</label>
                                     </span>
                                     @error('gst')
@@ -367,7 +369,7 @@
                                     @enderror
                                 </div>
                                 <div class="md-form mt-0 w-100">
-                                    <input type="text" class="form-control" name="trade_title">
+                                    <input type="text" class="form-control" name="trade_title" value="{{ old('trade_title') }}">
                                     <label>Trade/Business Title</label>
                                     @error('trade_title')
                                         <span class="invalid-feedback" role="alert">
@@ -377,7 +379,7 @@
                                 </div>
                                 <div class="md-form mt-0 w-100 form-row">
                                     <div class="col-12 col-md-6 pr-3">
-                                        <input type="text" class="form-control pr-3" name="gst_number">
+                                        <input type="text" class="form-control pr-3" name="gst_number" value="{{ old('gst_number') }}">
                                         <label class="pr-3 pl-1">GST Number</label>
                                         @error('gst_number')
                                             <span class="invalid-feedback" role="alert">
@@ -386,7 +388,7 @@
                                         @enderror
                                     </div>
                                     <div class="col-12 col-md-6 pl-3 media-pl-0">
-                                        <input type="text" class="form-control pl-3 media-pl-1" name="trade_address">
+                                        <input type="text" class="form-control pl-3 media-pl-1" name="trade_address" value="{{ old('trade_address') }}">
                                         <label class="pl-3 media-pl-1">Trade/Business Address</label>
                                         @error('trade_address')
                                             <span class="invalid-feedback" role="alert">
@@ -602,19 +604,19 @@
                                 <h5 class="font-medium text-black font-14 pt-3">Education Stream</h5>
                                 <div class="mobile-d-grid">
                                     <span>
-                                        <input type="radio" id="stream1" name="stream" value="Science" required>
+                                        <input type="radio" id="stream1" name="stream" value="Science" required {{ old('stream') === 'Science' ? 'checked' : '' }}>
                                         <label class="pl-2" for="stream1">Science</label>
                                     </span>
                                     <span class="pl-3 media-pl-0">
-                                        <input type="radio" id="stream2" name="stream" value="Arts">
+                                        <input type="radio" id="stream2" name="stream" value="Arts" {{ old('stream') === 'Arts' ? 'checked' : '' }}>
                                         <label class="pl-2" for="stream2">Arts</label>
                                     </span>
                                     <span class="pl-3 media-pl-0">
-                                        <input type="radio" id="stream3" name="stream" value="Commerce">
+                                        <input type="radio" id="stream3" name="stream" value="Commerce" {{ old('stream') === 'Commerce' ? 'checked' : '' }}>
                                         <label class="pl-2" for="stream3">Commerce</label>
                                     </span>
                                     <span class="pl-3 media-pl-0">
-                                        <input type="radio" id="stream4" name="stream" value="Other">
+                                        <input type="radio" id="stream4" name="stream" value="Other" {{ old('stream') === 'Other' ? 'checked' : '' }}>
                                         <label class="pl-2" for="stream4">Other</label>
                                     </span>
                                     @error('stream')
@@ -700,6 +702,11 @@
                                         <div id="student_verify" class="border">
                                             <student_verify class="pointer"></student_verify>
                                         </div>
+                                        @error('signature3')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
 
@@ -776,9 +783,14 @@
                                 
                             <div class="py-3">
                                 <label class="bold font-regular font-13" for="myCheckbox">
-                                    <input id="myCheckbox" type="checkbox" class="pl-2" />
+                                    <input id="myCheckbox" type="checkbox" class="pl-2" name="terms_accepted" value="1" {{ old('terms_accepted') ? 'checked' : '' }} />
                                     I Have Read and Understood all the Terms and Conditions and I Promise to Abide by all these Terms and Conditions and also those Implemented Further by Academy From Time to Time in Future. I also Certify that all the Information provided in this Admission form is Correct Best Extent to my Knowledge.
                                 </label>
+                                @error('terms_accepted')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="row mb-4">
                                 <div class="col-md-4">
@@ -786,17 +798,27 @@
                                     <div id="parent_sign" class="border">
                                         <parent_sign class="pointer"></parent_sign>
                                     </div>
+                                    @error('signature1')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                                 <div class="col-md-4">
                                     <label class="bold">Student's Signature</label><br>
                                     <div id="student_sign" class="border">
                                         <student_sign class="pointer"></student_sign>
                                     </div>
+                                    @error('signature2')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                             <!-- <span class="font-bold font-14 text-black pr-3">Registration Fee : ₹ 11,800</span> -->
                             <button id="myButton" type="submit" class="btn btn-mt-2 button" disabled>Register</button>
-                            <button type="submit" class="print btn button1">download form</button>                            
+                            <button type="button" class="print btn button1">download form</button>
                         </div>
                     </form>
                 </div>
@@ -841,9 +863,12 @@
 
     //check to pay
     $(document).ready(function () {
-        $('#myCheckbox').click(function () {
-        $('#myButton').prop("disabled", !$("#myCheckbox").prop("checked")); 
-        })
+        function toggleRegisterButton() {
+            $('#myButton').prop('disabled', !$('#myCheckbox').prop('checked'));
+        }
+
+        toggleRegisterButton();
+        $('#myCheckbox').on('change', toggleRegisterButton);
     });
 </script>
 
@@ -855,7 +880,7 @@ Vue.component('parent_sign', {
   template: `
   <span @click="openUpload">
     <img ref="preview" :src="showImage" style="cursor:pointer;width:100%;" alt="upload">
-    <input ref="input" @change="previewImage" type="file" id="file-field" name="signature1" style="display: none"/>
+    <input ref="input" @change="previewImage" type="file" id="file-field" name="signature1" accept="image/*" style="display: none"/>
   </span>`,
   data: () => { return {
     showImage: "{{asset('assets/frontend/img/upload.png')}}"
@@ -882,7 +907,7 @@ Vue.component('student_sign', {
   template: `
   <span @click="openUpload">
     <img ref="preview" :src="showImage" style="cursor:pointer;width:100%;" alt="upload">
-    <input ref="input" @change="previewImage" type="file" id="file-field" name="signature2" style="display: none"/>
+    <input ref="input" @change="previewImage" type="file" id="file-field" name="signature2" accept="image/*" style="display: none"/>
   </span>`,
   data: () => { return {
     showImage: "{{asset('assets/frontend/img/upload.png')}}"
@@ -909,7 +934,7 @@ Vue.component('student_verify', {
   template: `
   <span @click="openUpload">
     <img ref="preview" :src="showImage" style="cursor:pointer;width:100%;" alt="upload">
-    <input ref="input" @change="previewImage" type="file" id="file-field" name="signature3" style="display: none"/>
+    <input ref="input" @change="previewImage" type="file" id="file-field" name="signature3" accept="image/*" style="display: none"/>
   </span>`,
   data: () => { return {
     showImage: "{{asset('assets/frontend/img/upload1.png')}}"
@@ -933,7 +958,6 @@ new Vue({
 </script>
 
 <!-- download form -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery.print/1.3.3/jQuery.print.min.js"></script>
 <!-- <script src="https://allurewebsolutions.com/allure.js"></script> -->
 <script>
