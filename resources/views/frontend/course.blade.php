@@ -18,7 +18,7 @@
         </div>
         <!-- tabs and pills -->
          <div class="row px-3 pb-1">
-            <div class="col-md-12 mt-3 d-flex" role="tablist" aria-label="Course categories">
+            <div class="col-md-12 mt-1 d-flex" role="tablist" aria-label="Course categories">
             <a class="pr-2 js-course-tab active" href="#main-courses-pane" data-tab-target="#main-courses-pane" data-page-title="Crypto Cipher Academy Courses" role="tab" aria-controls="main-courses-pane" aria-selected="true">
                 <div class="font-regular mb-2 mt-2 page-12-btn" style="width: 220px;">
                     Advanced Certificate Programs
@@ -80,7 +80,7 @@
                                                 {{ $row->event_badge_text }}
                                             </div>
                                         </div>
-                                        <div class="font-regular text-grey2 font-16 mb-3 pr-md-4" style="line-height: 1.65;">
+                                        <div class="font-regular text-grey2 font-13 mb-3 pr-md-4" style="line-height: 1.8;">
                                             {!! nl2br(e($row->description)) !!}
                                             @if($row->highlight_text)
                                                 <span class="text-black bold">{{ $row->highlight_text }}</span>
@@ -91,29 +91,29 @@
                                                 <span class="d-inline-flex align-items-center justify-content-center mr-2" style="width: 22px; min-width: 22px; height: 22px; border-radius: 50%; background-color: #f2f4f7; color: #7a828f; font-size: 10px;">
                                                     <i class="far fa-clock"></i>
                                                 </span>
-                                                <div class="font-regular text-grey2 font-16" style="line-height: 1.45;">{{ $row->time_text }}</div>
+                                                <div class="font-regular text-grey2 font-13" style="line-height: 1.7;">{{ $row->time_text }}</div>
                                             </div>
                                             <div class="d-flex align-items-start mb-2">
                                                 <span class="d-inline-flex align-items-center justify-content-center mr-2" style="width: 22px; min-width: 22px; height: 22px; border-radius: 50%; background-color: #f2f4f7; color: #7a828f; font-size: 10px;">
                                                     <i class="fas fa-check"></i>
                                                 </span>
-                                                <div class="font-regular text-grey2 font-16" style="line-height: 1.45;">{{ $row->seats_text }}</div>
+                                                <div class="font-regular text-grey2 font-13" style="line-height: 1.7;">{{ $row->seats_text }}</div>
                                             </div>
                                             <div class="d-flex align-items-start mb-2">
                                                 <span class="d-inline-flex align-items-center justify-content-center mr-2" style="width: 22px; min-width: 22px; height: 22px; border-radius: 50%; background-color: #f2f4f7; color: #7a828f; font-size: 10px;">
                                                     <i class="fas fa-check"></i>
                                                 </span>
-                                                <div class="font-regular text-grey2 font-16" style="line-height: 1.45;">{{ $row->admission_text }}</div>
+                                                <div class="font-regular text-grey2 font-13" style="line-height: 1.7;">{{ $row->admission_text }}</div>
                                             </div>
                                             <div class="d-flex align-items-start">
                                                 <span class="d-inline-flex align-items-center justify-content-center mr-2" style="width: 22px; min-width: 22px; height: 22px; border-radius: 50%; background-color: #f2f4f7; color: #7a828f; font-size: 10px;">
                                                     <i class="fas fa-check"></i>
                                                 </span>
-                                                <div class="font-regular text-grey2 font-16" style="line-height: 1.45;">{{ $row->fees_text }}</div>
+                                                <div class="font-regular text-grey2 font-13" style="line-height: 1.7;">{{ $row->fees_text }}</div>
                                             </div>
                                         </div>
                                         <div class="row align-items-end pt-2">
-                                            <div class="col-md-8 col-12 font-regular text-grey2 font-16" style="line-height: 1.55;">
+                                            <div class="col-md-8 col-12 font-regular text-grey2 font-13" style="line-height: 1.7;">
                                                 <div><span class="text-black bold uppercase">Admissions :</span> {{ $row->contact_phone }}</div>
                                                 <div><span class="text-black bold uppercase">Website:</span> {{ $row->website }}</div>
                                             </div>
