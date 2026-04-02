@@ -540,14 +540,9 @@
         border-radius: 16px;
         overflow: hidden;
         background: linear-gradient(180deg, #ffffff 0%, #f6f8fb 100%);
-        border: 1px solid rgba(22, 31, 45, 0.08);
-        box-shadow: 0 10px 22px rgba(18, 28, 45, 0.08);
+        /* border: 1px solid rgba(22, 31, 45, 0.08); */
+        /* box-shadow: 0 10px 22px rgba(18, 28, 45, 0.08); */
         transition: transform 0.25s ease, box-shadow 0.25s ease;
-      }
-
-      body.home-welcome-page .home-course-card-shell:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 14px 28px rgba(18, 28, 45, 0.12);
       }
 
       body.home-welcome-page .home-course-card-content {
