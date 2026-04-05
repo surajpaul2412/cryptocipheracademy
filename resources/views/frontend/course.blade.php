@@ -38,9 +38,45 @@
         filter: drop-shadow(0 10px 18px rgba(18, 26, 43, 0.18));
     }
 
+    .course-page-faq-section {
+        margin-top: 0.25rem;
+    }
+
+    .course-page-faq-intro {
+        min-height: 100%;
+    }
+
+    .course-page-faq-icon {
+        width: 56px;
+        height: 56px;
+        min-width: 56px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background-image: linear-gradient(to bottom right, #edeef3, #f4f5f9);
+        box-shadow: 2px 2px 5px -1px rgba(0, 0, 0, 0.12), -1px -1px 3px 0 rgba(255, 255, 255, 0.9);
+    }
+
+    .course-page-faq-panel {
+        margin-bottom: 16px;
+    }
+
+    .course-page-faq-panel:last-child {
+        margin-bottom: 0;
+    }
+
+    .course-page-faq-question {
+        cursor: pointer;
+    }
+
     @media only screen and (max-width: 767.98px) {
         .course-page-shell {
             padding: 1rem 0.85rem 1.25rem;
+        }
+
+        .course-page-faq-intro {
+            margin-bottom: 1rem;
         }
     }
 </style>
@@ -181,6 +217,49 @@
                                 </div>
                             </div>
                         @endforelse
+
+                        @if($fastForwardFaqs->count())
+                            <div class="col-md-12 my-3 course-page-faq-section">
+                                <div class="slider-header bg-theme px-3 py-4">
+                                    <div class="row">
+                                        <div class="col-md-4 pt-2">
+                                            <div class="slider-header bg-theme px-3 py-4 course-page-faq-intro">
+                                                <div class="d-flex align-items-center mb-3">
+                                                    <div class="course-page-faq-icon">
+                                                        <img src="{{ asset('assets/frontend/img/voice-message.svg') }}" alt="Fast-Track FAQ" width="26">
+                                                    </div>
+                                                    <div class="pl-3">
+                                                        <div class="font-regular text-grey2 font-13 uppercase">Fast-Track Courses</div>
+                                                        <div class="font-black text-black font-20">Common FAQs</div>
+                                                    </div>
+                                                </div>
+                                                <div class="font-regular text-grey2 font-13 pr-md-3" style="line-height: 1.8;">
+                                                    Common questions about schedules, admission, seats and course planning for Fast-Track Courses.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8 pt-2">
+                                            <div class="panel-group" id="fastTrackCourseFaqAccordion" role="tablist" aria-multiselectable="true">
+                                                @foreach($fastForwardFaqs as $index => $faqRow)
+                                                    <div class="panel panel-default course-page-faq-panel">
+                                                        <div class="slider-header bg-theme" role="tab" id="headingFastTrackFaq{{ $index + 1 }}">
+                                                            <h2 class="mb-0 pl-3 py-3 font-regular text-black font-16 pr-90 course-page-faq-question" data-toggle="collapse" data-target="#collapseFastTrackFaq{{ $index + 1 }}" aria-expanded="{{ $index === 0 ? 'true' : 'false' }}" aria-controls="collapseFastTrackFaq{{ $index + 1 }}">
+                                                                {{ $faqRow->heading }}
+                                                            </h2>
+                                                        </div>
+                                                        <div id="collapseFastTrackFaq{{ $index + 1 }}" class="panel-collapse collapse {{ $index === 0 ? 'show' : '' }}" role="tabpanel" aria-labelledby="headingFastTrackFaq{{ $index + 1 }}" data-parent="#fastTrackCourseFaqAccordion">
+                                                            <div class="panel-body font-regular text-grey2 font-13 px-1 pt-3">
+                                                                {!! $faqRow->content !!}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

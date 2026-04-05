@@ -158,7 +158,7 @@
                         <span>Newsroom</span>
                     </a>
                 </li>
-                <li class="{{ Request::is('admin/academyCourse*') || Request::is('admin/fastForwardCourse*') ? 'active' : '' }}">
+                <li class="{{ Request::is('admin/academyCourse*') || Request::is('admin/fastForwardCourse*') || Request::is('admin/fastForwardFaq*') ? 'active' : '' }}">
                     <a href="{{ route('admin.academyCourse.index') }}" class="menu-toggle">
                         <i class="material-icons">star</i>
                         <span>Academy Courses</span>
@@ -169,6 +169,9 @@
                         </li>
                         <li>
                             <a href="{{ route('admin.fastForwardCourse.index') }}">Fast Forward Courses</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.fastForwardFaq.index') }}">Fast Forward FAQs</a>
                         </li>
                     </ul>
                 </li>
