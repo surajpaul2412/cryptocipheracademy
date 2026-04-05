@@ -19,6 +19,19 @@
         text-decoration: none;
     }
 
+    .course-page-tabs .page-12-btn {
+        transition: background-image 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease, color 0.25s ease, transform 0.25s ease;
+    }
+
+    .course-page-tabs .js-course-tab:hover .page-12-btn,
+    .course-page-tabs .js-course-tab.active .page-12-btn {
+        background-color: #7cbf51;
+        background-image: linear-gradient(to right, #74b84b, #7cbf51);
+        box-shadow: 0 10px 22px rgba(124, 191, 81, 0.34);
+        color: #ffffff;
+        transform: translateY(-1px);
+    }
+
     .course-page-pane {
         padding-top: 0.25rem;
     }
