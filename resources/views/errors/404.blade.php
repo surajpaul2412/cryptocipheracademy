@@ -33,18 +33,46 @@
       margin-bottom: 4px;
     }
     .home-announcement-bar{
+      min-height: 34px;
       height: 5vh;
-      color: red;
+      max-height: 40px;
+      color: #ffffff;
       display: flex;
       align-items: center;
       overflow: hidden;
+      padding: 0 14px;
+      border-radius: 6px;
+      border: 1px solid rgba(106, 153, 63, 0.35);
+      background-color: #9ccd63;
+      background-image: linear-gradient(90deg, #9ccd63 0%, #86c354 45%, #7cbf51 100%);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.28), 0 7px 18px rgba(124,191,81,0.22);
     }
     .home-announcement-marquee{
+      position: relative;
       width: 100%;
       height: 100%;
       overflow: hidden;
       display: flex;
       align-items: center;
+      border-radius: inherit;
+    }
+    .home-announcement-marquee::before,
+    .home-announcement-marquee::after{
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 18px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .home-announcement-marquee::before{
+      left: 0;
+      background: linear-gradient(to right, rgba(156,205,99,0.95), rgba(156,205,99,0));
+    }
+    .home-announcement-marquee::after{
+      right: 0;
+      background: linear-gradient(to left, rgba(124,191,81,0.95), rgba(124,191,81,0));
     }
     .home-announcement-track{
       display: flex;
@@ -60,11 +88,14 @@
       align-items: center;
       justify-content: center;
       white-space: nowrap;
-      font-size: clamp(12px, 0.9vw, 16px);
+      color: #ffffff;
+      font-size: clamp(12px, 0.88vw, 15px);
       font-weight: 700;
-      line-height: 1;
+      line-height: 1.1;
+      letter-spacing: 0.01em;
       text-align: center;
       padding: 0 12px;
+      text-shadow: 0 1px 0 rgba(59, 88, 29, 0.18);
     }
     @keyframes homeAnnouncementScroll {
       0% { transform: translateX(0); }
