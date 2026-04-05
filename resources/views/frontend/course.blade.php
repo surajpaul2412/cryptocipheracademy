@@ -107,12 +107,12 @@
 
             <div class="row pb-1">
                 <div class="col-md-12 mt-1 course-page-tabs" role="tablist" aria-label="Course categories">
-                    <a class="pr-2 js-course-tab active" href="#main-courses-pane" data-tab-target="#main-courses-pane" data-page-title="Crypto Cipher Academy Courses" role="tab" aria-controls="main-courses-pane" aria-selected="true">
+                    <a class="pr-2 js-course-tab active" href="#main-courses" data-tab-target="#main-courses-pane" data-tab-hash="#main-courses" data-page-title="Crypto Cipher Academy Courses" role="tab" aria-controls="main-courses-pane" aria-selected="true">
                         <div class="font-regular mb-2 mt-2 page-12-btn" style="width: 220px;">
                             Advanced Certificate Programs
                         </div>
                     </a>
-                    <a class="pr-2 js-course-tab" href="#fast-forward-pane" data-tab-target="#fast-forward-pane" data-page-title="Crypto Cipher Fast-Track Courses" role="tab" aria-controls="fast-forward-pane" aria-selected="false">
+                    <a class="pr-2 js-course-tab" href="#fast-forward-course" data-tab-target="#fast-forward-pane" data-tab-hash="#fast-forward-course" data-page-title="Crypto Cipher Fast-Track Courses" role="tab" aria-controls="fast-forward-pane" aria-selected="false">
                         <div class="font-regular mb-2 mt-2 page-12-btn">
                             Fast-Track Courses
                         </div>
@@ -285,23 +285,57 @@
 @section('script')
 <script>
     $(function () {
+        const courseTabs = $('.js-course-tab');
         const pageTitle = $('#js-course-page-title');
+        const tabPanes = $('#main-courses-pane, #fast-forward-pane');
+        const hashToTarget = {
+            '#main-courses': '#main-courses-pane',
+            '#main-courses-pane': '#main-courses-pane',
+            '#fast-forward-course': '#fast-forward-pane',
+            '#fast-forward-pane': '#fast-forward-pane'
+        };
 
-        $('.js-course-tab').on('click', function (event) {
-            event.preventDefault();
+        function activateCourseTab(targetOrHash, shouldUpdateHash = false) {
+            const target = hashToTarget[targetOrHash] || targetOrHash || '#main-courses-pane';
+            const nextTab = courseTabs.filter(function () {
+                return $(this).data('tab-target') === target;
+            }).first();
 
-            const target = $(this).data('tab-target');
-            const nextTitle = $(this).data('page-title');
+            if (!nextTab.length) {
+                return false;
+            }
 
-            $('.js-course-tab').removeClass('active').attr('aria-selected', 'false');
-            $(this).addClass('active').attr('aria-selected', 'true');
+            const nextTitle = nextTab.data('page-title');
+            const nextHash = nextTab.data('tab-hash') || nextTab.attr('href');
 
-            $('#main-courses-pane, #fast-forward-pane').removeClass('show active');
+            courseTabs.removeClass('active').attr('aria-selected', 'false');
+            nextTab.addClass('active').attr('aria-selected', 'true');
+
+            tabPanes.removeClass('show active');
             $(target).addClass('show active');
 
             if (nextTitle && pageTitle.length) {
                 pageTitle.text(nextTitle);
             }
+
+            if (shouldUpdateHash && nextHash && window.history && typeof window.history.replaceState === 'function') {
+                window.history.replaceState(null, '', window.location.pathname + window.location.search + nextHash);
+            }
+
+            return true;
+        }
+
+        courseTabs.on('click', function (event) {
+            event.preventDefault();
+            activateCourseTab($(this).data('tab-target'), true);
+        });
+
+        if (!activateCourseTab(window.location.hash)) {
+            activateCourseTab('#main-courses-pane');
+        }
+
+        $(window).on('hashchange', function () {
+            activateCourseTab(window.location.hash);
         });
     });
 </script>
