@@ -7,9 +7,8 @@ use Carbon\Carbon;
 use App\User;
 use App\StudentDetails;
 use App\Menu;
-use App\HomeNotification;
 use App\DesktopMenuSection;
-use App\FastForwardCourse;
+use App\RegisterFormCourse;
 use DB;
 use File;
 use Illuminate\Support\Str;
@@ -27,9 +26,8 @@ class RegisterController extends Controller
         $menus = Menu::orderBy('sort_by', "asc")->get();
         $desktopMenu = DesktopMenuSection::orderBy('sort_by', "asc")->get();
         $courseOptions = $this->getCourseOptions();
-        $batchOptions = $this->getBatchOptions();
 
-        return view('frontend.register', compact('menus', 'desktopMenu', 'courseOptions', 'batchOptions'));
+        return view('frontend.register', compact('menus', 'desktopMenu', 'courseOptions'));
     }
 
     /**
@@ -62,7 +60,7 @@ class RegisterController extends Controller
                 StudentDetails::create([
                     'student_id' => $user->id,
                     'course' => $validated['course'],
-                    'batch' => $validated['batch'],
+                    'batch' => null,
                     'image' => $uploadedFiles['image'],
                     'address' => $validated['address'],
                     'nationality' => $validated['nationality'],
@@ -202,7 +200,6 @@ class RegisterController extends Controller
     private function storeValidationRules(): array
     {
         $courseValues = $this->getCourseValues();
-        $batchValues = $this->getBatchOptions();
 
         return [
             'name' => 'required|string|min:3|max:255',
@@ -210,9 +207,6 @@ class RegisterController extends Controller
             'phone' => 'required|string|min:7|max:20',
             'course' => !empty($courseValues)
                 ? ['required', 'string', Rule::in($courseValues)]
-                : ['required', 'string', 'max:255'],
-            'batch' => !empty($batchValues)
-                ? ['required', 'string', Rule::in($batchValues)]
                 : ['required', 'string', 'max:255'],
             'address' => 'required|string|min:3|max:255',
             'nationality' => 'required|string|min:3|max:255',
@@ -262,7 +256,7 @@ class RegisterController extends Controller
             'email' => ['required', 'email', Rule::unique('users', 'email')->ignore($userId)],
             'phone' => 'required|string|min:7|max:20',
             'course' => 'required|string|max:255',
-            'batch' => 'required|string|max:255',
+            'batch' => 'nullable|string|max:255',
             'address' => 'required|string|min:3|max:255',
             'nationality' => 'required|string|min:3|max:255',
             'pincode' => 'required|string|min:3|max:20',
@@ -303,50 +297,19 @@ class RegisterController extends Controller
 
     private function getCourseOptions(): array
     {
-        $courseOptions = [
-            [
-                'id' => 'course_music_production',
-                'value' => 'Music Production Course',
-                'label' => 'Music Production Course',
-            ],
-            [
-                'id' => 'course_music_diploma',
-                'value' => 'Music Production Diploma',
-                'label' => 'Music Production Diploma',
-            ],
-            [
-                'id' => 'course_sound_diploma',
-                'value' => 'Sound Engineering Diploma',
-                'label' => 'Sound Engineering Diploma',
-            ],
-            [
-                'id' => 'course_live_sound',
-                'value' => 'Live Sound Engineering',
-                'label' => 'Live Sound Engineering',
-            ],
-        ];
-
-        $fastForwardOptions = FastForwardCourse::where('is_active', true)
+        return RegisterFormCourse::where('is_active', true)
             ->orderBy('sort_order')
             ->orderBy('id')
             ->get()
             ->map(function ($course) {
-                $courseTitle = trim('Fast Forward ' . $course->heading . ' ' . $course->subheading);
-                $courseLabel = $course->event_badge_text
-                    ? $courseTitle . ' (' . $course->event_badge_text . ')'
-                    : $courseTitle;
-
                 return [
-                    'id' => 'course_fast_forward_' . $course->id,
-                    'value' => $courseLabel,
-                    'label' => $courseLabel,
+                    'id' => 'register_form_course_' . $course->id,
+                    'value' => $course->name,
+                    'label' => $course->name,
                 ];
             })
-            ->unique('value')
             ->values()
             ->all();
-
-        return array_merge($courseOptions, $fastForwardOptions);
     }
 
     private function getCourseValues(): array
@@ -356,19 +319,6 @@ class RegisterController extends Controller
             ->filter()
             ->values()
             ->all();
-    }
-
-    private function getBatchOptions(): array
-    {
-        $homeNotification = HomeNotification::select('register_date1', 'register_date2', 'register_date3')->first();
-
-        return collect([
-            optional($homeNotification)->register_date1,
-            optional($homeNotification)->register_date2,
-            optional($homeNotification)->register_date3,
-        ])->filter(function ($batch) {
-            return filled($batch);
-        })->values()->all();
     }
 
     private function uploadStudentAsset($file): string

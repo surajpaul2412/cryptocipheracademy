@@ -175,6 +175,12 @@
                         </li>
                     </ul>
                 </li>
+                <li class="{{ Request::is('admin/registerFormCourse*') ? 'active' : '' }}">
+                    <a href="{{ route('admin.registerFormCourse.index') }}">
+                        <i class="material-icons">app_registration</i>
+                        <span>Register Form Courses</span>
+                    </a>
+                </li>
                 <li class="{{ Request::is('admin/productionCourse*') ? 'active' : '' }}">
                     <a href="{{ route('admin.productionCourse.index') }}" class="menu-toggle">
                         <i class="material-icons">star</i>

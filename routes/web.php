@@ -119,6 +119,7 @@ Route::group(['as'=>'admin.','prefix'=>'admin','namespace'=>'Admin','middleware'
     Route::resource('academyCourse','AcademyCourseController');
     Route::resource('fastForwardCourse','FastForwardCourseController')->except(['show']);
     Route::resource('fastForwardFaq','FastForwardFaqController')->except(['show']);
+    Route::resource('registerFormCourse','RegisterFormCourseController')->except(['show']);
     Route::resource('vacancy','VacancyController');
     Route::resource('faq','FaqController');
     Route::resource('faqCareer','FaqCareerController');

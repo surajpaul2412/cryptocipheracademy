@@ -109,7 +109,7 @@
                 @enderror
 
                 <label class="mt-3">batch :</label>
-                <input type="text" class="form-control" name="batch" required value="{{$details->batch}}">
+                <input type="text" class="form-control" name="batch" value="{{$details->batch}}">
                 @error('batch')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>

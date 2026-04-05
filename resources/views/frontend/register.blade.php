@@ -123,6 +123,20 @@
     .invalid-feedback{
         display: block;margin-top: -10px;
     }
+    .register-course-options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding-top: 6px;
+    }
+    .register-course-option {
+        display: flex;
+        align-items: flex-start;
+    }
+    .register-course-option label {
+        margin-bottom: 0;
+        line-height: 1.4;
+    }
 </style>
 @endsection
 
@@ -161,7 +175,7 @@
                         <span class="bold">03.</span> Incase you need any support or have any queries then don’t hesitate and contact at <a class="text-grey2 bold font-regular" href="callto:9910092983">9910092983</a> or email us at <a class="text-grey2 bold font-regular" href="mailto:academy@cryptocipher.in">academy@cryptocipher.in</a> -->
                     </div>
                     <div class="font-medium text-black font-12 px-3 media-px">
-                        Fill The Form ( Select Your Batch & Fill all your personal details )
+                        Fill The Form ( Select Your Course & Fill all your personal details )
                     </div>
                     <form method="POST" action="{{route('register.store')}}" enctype="multipart/form-data">
                         @csrf
@@ -179,9 +193,9 @@
                                             <input type="text" class="form-control" id="output" disabled/>
                                         </div>
                                         <span class="font-regular font-12 text-grey2">Select Course</span>
-                                        <div class="mobile-d-grid">
-                                            @foreach($courseOptions as $courseOption)
-                                                <span class="{{ $loop->first ? '' : 'pl-3 media-pl-0' }}">
+                                        <div class="register-course-options">
+                                            @forelse($courseOptions as $courseOption)
+                                                <div class="register-course-option">
                                                     <input
                                                         type="radio"
                                                         id="{{ $courseOption['id'] }}"
@@ -191,32 +205,11 @@
                                                         {{ $loop->first ? 'required' : '' }}
                                                     >
                                                     <label class="pl-2" for="{{ $courseOption['id'] }}">{{ $courseOption['label'] }}</label>
-                                                </span>
-                                            @endforeach
-                                            @error('course')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                        <span class="font-regular font-12 text-grey2">Batch Commencement</span>
-                                        <div class="mobile-d-grid">
-                                            @forelse($batchOptions as $batchOption)
-                                                <span class="{{ $loop->first ? '' : 'pl-3 media-pl-0' }}">
-                                                    <input
-                                                        type="radio"
-                                                        id="batch_{{ $loop->index }}"
-                                                        name="batch"
-                                                        value="{{ $batchOption }}"
-                                                        {{ old('batch') === $batchOption ? 'checked' : '' }}
-                                                        {{ $loop->first ? 'required' : '' }}
-                                                    >
-                                                    <label class="pl-2" for="batch_{{ $loop->index }}">{{ $batchOption }}</label>
-                                                </span>
+                                                </div>
                                             @empty
-                                                <div class="font-regular text-grey2 font-13 pt-2">Batch dates will be updated soon.</div>
+                                                <div class="font-regular text-grey2 font-13 pt-2">Course options will be updated soon.</div>
                                             @endforelse
-                                            @error('batch')
+                                            @error('course')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
