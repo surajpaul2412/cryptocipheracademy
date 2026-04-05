@@ -82,6 +82,9 @@
 @endsection
 
 @section('content')
+@php
+    $imageBaseUrl = rtrim(env('image_url') ?: url('images'), '/');
+@endphp
 <div class="bg-theme1 main-inner">
     <section class="container slider-header">
         <!-- title -->
@@ -115,7 +118,7 @@
                     <div class="slider-header nav-link {{$index == 0 ? 'active' : '' }}" href="#tab{{$index+1}}" data-toggle="tab">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="" class="lazy" style="background: url('{{env('image_url')}}/news/{{$row->image}}');background-origin: center;background-size:cover;background-repeat: no-repeat;height: 250px;"></div>
+                                <div class="" class="lazy" style="background: url('{{$imageBaseUrl}}/news/{{$row->image}}');background-origin: center;background-size:cover;background-repeat: no-repeat;height: 250px;"></div>
                             </div>
                             <div class="col-md-12 bold title">
                                 <div class="px-2 pt-2" style="height:58px;overflow-y: hidden;">
@@ -160,7 +163,7 @@
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body p-1">
-                    <img alt="{{$row->title}}" data-original="{{env('image_url')}}/news/{{$row->image}}" class="lazy d-block mx-auto" width="100%">
+                    <img alt="{{$row->title}}" src="{{$imageBaseUrl}}/news/{{$row->image}}" data-original="{{$imageBaseUrl}}/news/{{$row->image}}" loading="lazy" class="lazy d-block mx-auto" width="100%">
                     <div class="font-bold text-black pt-3 px-2" style="text-align: justify;">{{$row->title}}</div>
                     <p class="font-regular text-grey2 px-2 pt-2">{!! $row->content !!}</p>
                 </div>
@@ -176,15 +179,11 @@
 @endsection
 
 @section('script')
-<!-- lazyloader -->
-<script src="js/customLazy.js"></script>
-<script src="https://rawgit.com/intoro/Lazy_Load_JQuery/master/js/2_2_4_jquery.min.js"></script>
-<script src="https://rawgit.com/intoro/Lazy_Load_JQuery/master/js/1_9_7_jquery.lazyload.js"></script>
 <script>
-$(document).ready(function(){
-  $('img.lazy').lazyload({
-    effect: "fadeIn"
-  });
+document.querySelectorAll('img.lazy[data-original]').forEach(function (img) {
+  if (!img.getAttribute('src')) {
+    img.setAttribute('src', img.getAttribute('data-original'));
+  }
 });
 </script>
 @endsection

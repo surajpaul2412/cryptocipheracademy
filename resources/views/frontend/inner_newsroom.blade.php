@@ -45,6 +45,9 @@
 @endsection
 
 @section('content')
+@php
+    $imageBaseUrl = rtrim(env('image_url') ?: url('images'), '/');
+@endphp
 <div class="bg-theme1 main-inner">
     <section class="container slider-header">
         <!-- title -->
@@ -73,7 +76,7 @@
         @if($news->count())
         <div class="row px-3">
             <div class="col-md-12 col-12">
-                <img class="lazy" alt="{{$news->title}}" data-original="{{env('image_url')}}/news/{{$news->image}}" width="100%">
+                <img class="lazy" alt="{{$news->title}}" src="{{$imageBaseUrl}}/news/{{$news->image}}" data-original="{{$imageBaseUrl}}/news/{{$news->image}}" loading="lazy" width="100%">
                 <h4 class="font-bold text-black pt-3">{{$news->title}}</h4>
                 <p class="font-regular text-grey2 pt-2">{!! $news->content !!}</p>
             </div>
@@ -85,15 +88,11 @@
 @endsection
 
 @section('script')
-<!-- lazyloader -->
-<script src="js/customLazy.js"></script>
-<script src="https://rawgit.com/intoro/Lazy_Load_JQuery/master/js/2_2_4_jquery.min.js"></script>
-<script src="https://rawgit.com/intoro/Lazy_Load_JQuery/master/js/1_9_7_jquery.lazyload.js"></script>
 <script>
-$(document).ready(function(){
-  $('img.lazy').lazyload({
-    effect: "fadeIn"
-  });
+document.querySelectorAll('img.lazy[data-original]').forEach(function (img) {
+  if (!img.getAttribute('src')) {
+    img.setAttribute('src', img.getAttribute('data-original'));
+  }
 });
 </script>
 @endsection

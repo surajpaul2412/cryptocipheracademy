@@ -25,6 +25,9 @@
 @endsection
 
 @section('content')
+@php
+    $imageBaseUrl = rtrim(url('images'), '/');
+@endphp
 <div class="bg-theme1 main-inner">
     <section class="container slider-header">
         <!-- title -->
@@ -38,7 +41,7 @@
             @foreach($pros as $index => $row)
             <div class="col-md-4 my-5">
                 <div class="slider-header bg-theme" align="center">
-                    <img data-original="{{env('image_url')}}/pros/{{$row->image}}" alt="{{$row->name}}" width="55%" class="lazy mx-auto d-block p-1 bg-theme shadow-round mar-T-26">
+                    <img src="{{$imageBaseUrl}}/pros/{{$row->image}}" data-original="{{$imageBaseUrl}}/pros/{{$row->image}}" loading="lazy" alt="{{$row->name}}" width="55%" class="lazy mx-auto d-block p-1 bg-theme shadow-round mar-T-26">
                     <h6 class="font-bold font-1vw text-dark pt-4">{{$row->name}}</h6>
                     <div class="about-title px-1 pt-2 bold" style="min-height: 20vh;">{!! \Illuminate\Support\Str::limit($row->brief, 500, $end='...') !!}</div>
                     <div class="py-2 bold about-symbol"><i>"</i></div>
@@ -46,7 +49,7 @@
                     <div class="my-2 px-3">
                         <a data-toggle="modal" data-target="#myModal{{$index+1}}">
                             <div class="about-see-more w-100 font-regular bold pt-2">
-                              <img data-original="{{ asset('assets/frontend/img/wallpaper.svg') }}" alt="wallpaper" class="lazy" width="20px">
+                              <img src="{{ asset('assets/frontend/img/wallpaper.svg') }}" data-original="{{ asset('assets/frontend/img/wallpaper.svg') }}" loading="lazy" alt="wallpaper" class="lazy" width="20px">
                               <span class="pl-1"> See More</span>
                             </div>
                         </a>
@@ -84,14 +87,11 @@
 @endsection
 
 @section('script')
-<script src="js/customLazy.js"></script>
-<script src="https://rawgit.com/intoro/Lazy_Load_JQuery/master/js/2_2_4_jquery.min.js"></script>
-<script src="https://rawgit.com/intoro/Lazy_Load_JQuery/master/js/1_9_7_jquery.lazyload.js"></script>
 <script>
-$(document).ready(function(){
-  $('img.lazy').lazyload({
-    effect: "fadeIn"
-  });
+document.querySelectorAll('img.lazy[data-original]').forEach(function (img) {
+  if (!img.getAttribute('src')) {
+    img.setAttribute('src', img.getAttribute('data-original'));
+  }
 });
 </script>
 @endsection

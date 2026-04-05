@@ -54,6 +54,9 @@
 @endsection
 
 @section('content')
+@php
+    $imageBaseUrl = rtrim(url('images'), '/');
+@endphp
 <div class="bg-theme1 main-inner">
     <section class="container slider-header">
         <!-- title -->
@@ -99,7 +102,7 @@
                     @foreach($studioEquipmentHardwareImage as $row)
                     <div class="col-md-3 px-1">
                         <div class="box-shadow">
-                            <img class="lazy" alt="equipments" data-original="{{env('image_url')}}/studioEquipment/{{$row->image}}" width="100%">
+                            <img class="lazy" alt="equipments" src="{{$imageBaseUrl}}/studioEquipment/{{$row->image}}" data-original="{{$imageBaseUrl}}/studioEquipment/{{$row->image}}" loading="lazy" width="100%">
                         </div>
                     </div>
                     @endforeach
@@ -142,7 +145,7 @@
                     @foreach($studioEquipmentSoftwareImage as $row)
                     <div class="col-md-3 px-1">
                         <div class="box-shadow">
-                            <img class="lazy" alt="equipments" data-original="{{env('image_url')}}/studioEquipment/{{$row->image}}" width="100%">
+                            <img class="lazy" alt="equipments" src="{{$imageBaseUrl}}/studioEquipment/{{$row->image}}" data-original="{{$imageBaseUrl}}/studioEquipment/{{$row->image}}" loading="lazy" width="100%">
                         </div>
                     </div>
                     @endforeach
@@ -156,23 +159,23 @@
                 <div class="row">
                 @foreach($gallery as $row)
                     <div class="col-md-3 mt-3 col-12">
-                        <a href="{{env('image_url')}}/gallery/{{$row->short_image1}}" data-lightbox="gallery" class="lazy w-100 d-flex mx-auto">
-                            <div class="img-fluid img-thumbnail" style="background-image: url('{{env('image_url')}}/gallery/{{$row->short_image1}}');"></div>
+                        <a href="{{$imageBaseUrl}}/gallery/{{$row->short_image1}}" data-lightbox="gallery" class="lazy w-100 d-flex mx-auto">
+                            <div class="img-fluid img-thumbnail" style="background-image: url('{{$imageBaseUrl}}/gallery/{{$row->short_image1}}');"></div>
                         </a>
                     </div>
                     <div class="col-md-3 mt-3 col-12">
-                        <a href="{{env('image_url')}}/gallery/{{$row->short_image2}}" data-lightbox="gallery" class="lazy w-100 d-flex mx-auto">
-                            <div class="img-fluid img-thumbnail" style="background-image: url('{{env('image_url')}}/gallery/{{$row->short_image2}}');"></div>
+                        <a href="{{$imageBaseUrl}}/gallery/{{$row->short_image2}}" data-lightbox="gallery" class="lazy w-100 d-flex mx-auto">
+                            <div class="img-fluid img-thumbnail" style="background-image: url('{{$imageBaseUrl}}/gallery/{{$row->short_image2}}');"></div>
                         </a>
                     </div>
                     <div class="col-md-3 mt-3 col-12">
-                        <a href="{{env('image_url')}}/gallery/{{$row->short_image3}}" data-lightbox="gallery" class="lazy w-100 d-flex mx-auto">
-                            <div class="img-fluid img-thumbnail" style="background-image: url('{{env('image_url')}}/gallery/{{$row->short_image3}}');"></div>
+                        <a href="{{$imageBaseUrl}}/gallery/{{$row->short_image3}}" data-lightbox="gallery" class="lazy w-100 d-flex mx-auto">
+                            <div class="img-fluid img-thumbnail" style="background-image: url('{{$imageBaseUrl}}/gallery/{{$row->short_image3}}');"></div>
                         </a>
                     </div>
                     <div class="col-md-3 mt-3 col-12">
-                        <a href="{{env('image_url')}}/gallery/{{$row->short_image4}}" data-lightbox="gallery" class="lazy w-100 d-flex mx-auto">
-                            <div class="img-fluid img-thumbnail" style="background-image: url('{{env('image_url')}}/gallery/{{$row->short_image4}}');"></div>
+                        <a href="{{$imageBaseUrl}}/gallery/{{$row->short_image4}}" data-lightbox="gallery" class="lazy w-100 d-flex mx-auto">
+                            <div class="img-fluid img-thumbnail" style="background-image: url('{{$imageBaseUrl}}/gallery/{{$row->short_image4}}');"></div>
                         </a>
                     </div>
                 @endforeach
@@ -198,15 +201,11 @@ lightbox.option({
     'wrapAround': true
 });
 </script>
-<!-- lazyloader -->
-<script src="js/customLazy.js"></script>
-<script src="https://rawgit.com/intoro/Lazy_Load_JQuery/master/js/2_2_4_jquery.min.js"></script>
-<script src="https://rawgit.com/intoro/Lazy_Load_JQuery/master/js/1_9_7_jquery.lazyload.js"></script>
 <script>
-$(document).ready(function(){
-  $('img.lazy').lazyload({
-    effect: "fadeIn"
-  });
+document.querySelectorAll('img.lazy[data-original]').forEach(function (img) {
+    if (!img.getAttribute('src')) {
+        img.setAttribute('src', img.getAttribute('data-original'));
+    }
 });
 </script>
 @endsection

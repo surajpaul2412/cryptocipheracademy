@@ -334,7 +334,11 @@ $desktopMenu = DesktopMenuSection::orderBy('sort_by', "asc")->get();
       height: 30vh;
     }
     .section2 .desktop-menu-accordion-item{
-      padding: 8px 0;
+      /* padding: 8px 0; */
+    }
+    .section2 > div{
+      position: relative;
+      padding: 8px 0px;
     }
     .section2 .desktop-menu-accordion-trigger{
       display: flex;
@@ -371,7 +375,7 @@ $desktopMenu = DesktopMenuSection::orderBy('sort_by', "asc")->get();
     }
     .section2 .desktop-menu-accordion-submenu{
       display: none;
-      padding-top: 6px;
+      /* padding-top: 6px; */
     }
     .section2 .desktop-menu-accordion-item.is-open .desktop-menu-accordion-submenu{
       display: table;
@@ -613,14 +617,14 @@ $desktopMenu = DesktopMenuSection::orderBy('sort_by', "asc")->get();
                         $submenuId = 'desktop-section2-submenu-' . $try2->id;
                         $hasSubmenu = $try2->desktopSubMenu->count() > 0;
                       @endphp
-                      <div class="desktop-menu-accordion-item">
+                      <div class="desktop-menu-accordion-item{{ $hasSubmenu ? ' is-open' : '' }}">
                         <div class="desktop-menu-accordion-trigger">
                           <a class="font-14 text-black pl-2 font-bold desktop-menu-accordion-link" href="{{url('/')}}{{$try2->url}}">{{$try2->name}}</a>
                           @if($hasSubmenu)
                             <button
                               type="button"
                               class="desktop-menu-accordion-button js-desktop-menu-toggle"
-                              aria-expanded="false"
+                              aria-expanded="true"
                               aria-controls="{{ $submenuId }}"
                             >
                               <i class="fas fa-angle-right"></i>
@@ -628,7 +632,7 @@ $desktopMenu = DesktopMenuSection::orderBy('sort_by', "asc")->get();
                           @endif
                         </div>
                         @if($hasSubmenu)
-                          <div class="menu desktop-menu-accordion-submenu" id="{{ $submenuId }}" hidden>
+                          <div class="menu desktop-menu-accordion-submenu" id="{{ $submenuId }}">
                             @foreach($try2->desktopSubMenu as $trytry)
                               <span><a href="{{url('/')}}{{$trytry->url}}">{{$trytry->name}}</a></span>
                             @endforeach
@@ -762,25 +766,16 @@ $desktopMenu = DesktopMenuSection::orderBy('sort_by', "asc")->get();
 
         const isOpen = parentItem.classList.contains('is-open');
 
-        document.querySelectorAll('.section2 .desktop-menu-accordion-item.is-open').forEach(function (openItem) {
-          openItem.classList.remove('is-open');
-          const openButton = openItem.querySelector('.js-desktop-menu-toggle');
-          const openSubmenuId = openButton ? openButton.getAttribute('aria-controls') : null;
-          const openSubmenu = openSubmenuId ? document.getElementById(openSubmenuId) : null;
-
-          if (openButton) {
-            openButton.setAttribute('aria-expanded', 'false');
-          }
-          if (openSubmenu) {
-            openSubmenu.hidden = true;
-          }
-        });
-
-        if (!isOpen) {
-          parentItem.classList.add('is-open');
-          button.setAttribute('aria-expanded', 'true');
-          submenu.hidden = false;
+        if (isOpen) {
+          parentItem.classList.remove('is-open');
+          button.setAttribute('aria-expanded', 'false');
+          submenu.hidden = true;
+          return;
         }
+
+        parentItem.classList.add('is-open');
+        button.setAttribute('aria-expanded', 'true');
+        submenu.hidden = false;
       });
     });
   })();
