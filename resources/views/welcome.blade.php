@@ -754,6 +754,96 @@
         }
       }
     }
+
+    @media screen and (max-width: 899.98px) {
+      body.home-welcome-page .home-course-strip {
+        height: auto !important;
+        max-height: none;
+        padding: 14px 0 6px;
+        overflow: visible;
+      }
+
+      body.home-welcome-page .home-course-carousel,
+      body.home-welcome-page .home-course-carousel.slick-slider,
+      body.home-welcome-page .home-course-carousel.slick-initialized {
+        height: auto !important;
+        max-height: none;
+        overflow: visible;
+      }
+
+      body.home-welcome-page .home-course-carousel .slick-list,
+      body.home-welcome-page .home-course-carousel .slick-track,
+      body.home-welcome-page .home-course-carousel .slick-slide,
+      body.home-welcome-page .home-course-carousel .slick-slide > div {
+        height: auto !important;
+        max-height: none;
+      }
+
+      body.home-welcome-page .home-course-carousel .slick-list {
+        margin: 0 -6px;
+        padding: 8px 6px 12px;
+        overflow: visible;
+      }
+
+      body.home-welcome-page .home-course-carousel .slick-track {
+        display: block;
+      }
+
+      body.home-welcome-page .home-course-carousel .slick-slide {
+        margin: 0;
+        padding: 0 6px;
+      }
+
+      body.home-welcome-page .home-course-slide {
+        height: auto !important;
+        max-height: none;
+        overflow: visible;
+        background: transparent;
+        box-shadow: none;
+      }
+
+      body.home-welcome-page .home-course-card-shell {
+        border-radius: 16px;
+      }
+
+      body.home-welcome-page .home-course-card-content {
+        padding: 10px 10px 12px;
+        gap: 10px;
+      }
+
+      body.home-welcome-page .course-image {
+        position: relative;
+        display: block;
+        height: clamp(160px, 48vw, 205px);
+        min-height: 160px;
+        max-height: 205px;
+        border-radius: 14px;
+        overflow: hidden;
+        background: #eef2f7;
+      }
+
+      body.home-welcome-page .course-image img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      body.home-welcome-page .course-title {
+        font-size: 1.6rem;
+        line-height: 1.18;
+      }
+
+      body.home-welcome-page .course-footer {
+        padding-top: 9px;
+      }
+
+      body.home-welcome-page .duration,
+      body.home-welcome-page .details-link {
+        font-size: 12px;
+      }
+    }
     </style>
     <!--Schema Markup -->
     <script type=application/ld+json>
@@ -1864,7 +1954,7 @@ $(document).ready(function(){
 
   if ($homeCarousel.length && homeSlideCount) {
     var homeDesktopSlides = Math.min(3, homeSlideCount);
-    var homeTabletSlides = Math.min(2, homeSlideCount);
+    var homeMobileSlides = 1;
 
     $homeCarousel.slick({
       speed: 500,
@@ -1887,21 +1977,12 @@ $(document).ready(function(){
               }
           },
           {
-              breakpoint: 768,
+              breakpoint: 900,
               settings: {
-                  slidesToShow: homeTabletSlides,
+                  slidesToShow: homeMobileSlides,
                   slidesToScroll: 1,
-                  autoplay: homeSlideCount > homeTabletSlides,
-                  infinite: homeSlideCount > homeTabletSlides,
-              }
-          },
-          {
-              breakpoint: 480,
-              settings: {
-                  slidesToShow: 1,
-                  slidesToScroll: 1,
-                  autoplay: homeSlideCount > 1,
-                  infinite: homeSlideCount > 1,
+                  autoplay: homeSlideCount > homeMobileSlides,
+                  infinite: homeSlideCount > homeMobileSlides,
               }
           }
       ]
