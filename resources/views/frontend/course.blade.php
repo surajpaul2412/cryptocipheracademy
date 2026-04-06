@@ -51,6 +51,10 @@
         filter: drop-shadow(0 10px 18px rgba(18, 26, 43, 0.18));
     }
 
+    .course-page-fast-card {
+        scroll-margin-top: 120px;
+    }
+
     .course-page-faq-section {
         margin-top: 0.25rem;
     }
@@ -156,7 +160,13 @@
                                     ? route('fast-forward-courses.show', $row->slug)
                                     : 'javascript:void(0)';
                             @endphp
-                            <div class="col-md-12 my-3">
+                            <div
+                                class="col-md-12 my-3 course-page-fast-card"
+                                @if($row->slug)
+                                    id="fast-forward-course-{{ $row->slug }}"
+                                    data-fast-course-slug="{{ $row->slug }}"
+                                @endif
+                            >
                                 <div class="slider-header pt-4 pb-3 px-3">
                                     <div class="row align-items-stretch">
                                         <div class="col-lg-8 col-md-8 col-12">
@@ -281,12 +291,48 @@
         const courseTabs = $('.js-course-tab');
         const pageTitle = $('#js-course-page-title');
         const tabPanes = $('#main-courses-pane, #fast-forward-pane');
+        const fastCourseCards = $('[data-fast-course-slug]');
         const hashToTarget = {
             '#main-courses': '#main-courses-pane',
             '#main-courses-pane': '#main-courses-pane',
             '#fast-forward-course': '#fast-forward-pane',
             '#fast-forward-pane': '#fast-forward-pane'
         };
+
+        function parseCourseHash(hashValue) {
+            const parts = (hashValue || '').split('#').filter(Boolean);
+            const baseHash = parts.length ? '#' + parts[0] : '#main-courses';
+            const courseSlug = parts.length > 1 ? decodeURIComponent(parts.slice(1).join('#')).trim() : '';
+
+            return {
+                baseHash: hashToTarget[baseHash] ? baseHash : '#main-courses',
+                courseSlug: courseSlug
+            };
+        }
+
+        function scrollToFastForwardCard(courseSlug) {
+            if (!courseSlug || !fastCourseCards.length) {
+                return false;
+            }
+
+            const normalizedSlug = courseSlug.toLowerCase();
+            const targetCard = fastCourseCards.filter(function () {
+                return String($(this).data('fast-course-slug')).toLowerCase() === normalizedSlug;
+            }).first();
+
+            if (!targetCard.length) {
+                return false;
+            }
+
+            window.setTimeout(function () {
+                targetCard[0].scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }, 80);
+
+            return true;
+        }
 
         function activateCourseTab(targetOrHash, shouldUpdateHash = false) {
             const target = hashToTarget[targetOrHash] || targetOrHash || '#main-courses-pane';
@@ -318,17 +364,28 @@
             return true;
         }
 
+        function applyHashState(hashValue) {
+            const parsedHash = parseCourseHash(hashValue);
+            const isActivated = activateCourseTab(parsedHash.baseHash);
+
+            if (isActivated && parsedHash.baseHash === '#fast-forward-course') {
+                scrollToFastForwardCard(parsedHash.courseSlug);
+            }
+
+            return isActivated;
+        }
+
         courseTabs.on('click', function (event) {
             event.preventDefault();
             activateCourseTab($(this).data('tab-target'), true);
         });
 
-        if (!activateCourseTab(window.location.hash)) {
+        if (!applyHashState(window.location.hash)) {
             activateCourseTab('#main-courses-pane');
         }
 
         $(window).on('hashchange', function () {
-            activateCourseTab(window.location.hash);
+            applyHashState(window.location.hash);
         });
     });
 </script>
