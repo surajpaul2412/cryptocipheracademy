@@ -206,13 +206,6 @@
                                                     <div><span class="text-black bold uppercase">Admissions :</span> {{ $row->contact_phone }}</div>
                                                     <div><span class="text-black bold uppercase">Website:</span> {{ $row->website }}</div>
                                                 </div>
-                                                <div class="col-md-4 col-12 text-md-right mt-3 mt-md-0">
-                                                    <a href="{{ $detailUrl }}">
-                                                        <div class="font-regular mb-0 page-12-btn d-inline-block px-4">
-                                                            VIEW DETAILS
-                                                        </div>
-                                                    </a>
-                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-12 d-flex justify-content-center mt-3 mt-md-0">

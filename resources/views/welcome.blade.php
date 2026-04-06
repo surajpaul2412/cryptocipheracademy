@@ -509,6 +509,7 @@
 
       body.home-welcome-page .home-course-carousel .slick-track {
         display: flex;
+        align-items: center;
       }
 
       body.home-welcome-page .home-course-carousel .slick-slide {
@@ -517,7 +518,9 @@
       }
 
       body.home-welcome-page .home-course-carousel .slick-slide > div {
-        display: block;
+        display: flex;
+        align-items: center;
+        width: 100%;
       }
 
       body.home-welcome-page .home-course-slide {
@@ -537,7 +540,7 @@
         display: block;
         color: inherit;
         text-decoration: none;
-        border-radius: 16px;
+        /* border-radius: 16px; */
         overflow: hidden;
         background: linear-gradient(180deg, #ffffff 0%, #f6f8fb 100%);
         /* border: 1px solid rgba(22, 31, 45, 0.08); */
@@ -550,12 +553,12 @@
         height: 100%;
         display: flex;
         flex-direction: column;
-        padding: 12px 14px 14px;
+        padding: 5px 6px;
         gap: 10px;
       }
 
       body.home-welcome-page .course-image {
-        height: min(108px, 10.4vh);
+        height: min(108px, 13.4vh);
         margin-bottom: 0;
         overflow: hidden;
         border-radius: 12px;
@@ -571,8 +574,8 @@
 
       body.home-welcome-page .course-title {
         font-size: clamp(13px, 0.98vw, 18px);
-        line-height: 1.16;
-        min-height: 2.32em;
+        /* line-height: 1.16; */
+        /* min-height: 2.32em; */
         overflow: hidden;
         margin-bottom: 0;
         color: #1f2733;
@@ -653,15 +656,13 @@
       }
 
       body.home-welcome-page .home-announcement-bar {
-        min-height: 34px;
-        height: 5vh;
-        max-height: 40px;
+        min-height: 26px;
+        height: 3.6vh;
+        max-height: 30px;
         color: #ffffff;
         display: flex;
         align-items: center;
         overflow: hidden;
-        padding: 0 14px;
-        border-radius: 6px;
         border: 1px solid rgba(106, 153, 63, 0.35);
         background-color: #9ccd63;
         background-image: linear-gradient(90deg, #9ccd63 0%, #86c354 45%, #7cbf51 100%);
@@ -715,13 +716,19 @@
         justify-content: center;
         white-space: nowrap;
         color: #ffffff;
-        font-size: clamp(12px, 0.88vw, 15px);
+        font-size: clamp(11px, 0.82vw, 14px);
         font-weight: 700;
         line-height: 1.1;
         letter-spacing: 0.01em;
         text-align: center;
         padding: 0 12px;
         text-shadow: 0 1px 0 rgba(59, 88, 29, 0.18);
+      }
+
+      body.home-welcome-page .home-announcement-wrap {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
       }
 
       @keyframes homeAnnouncementScroll {
@@ -1112,37 +1119,17 @@
             <div class="col-md-9">
                 <div style="height: 12vh;">
                     <div class="row px-3" style="position: relative;top: 31%;height: 5vh">
-                        <div class="col-md-9 pr-0">
-                            {{--<nav class="navbar navbar-expand-lg shadow-none px-0 py-1" style="height: 5vh;">
-                              @if($homeNotification->count())
-                                <ul class="navbar-nav ml-auto">
-                                    <li class="nav-item pr-2">
-                                        <div class="nav-link font-regular text-black bold d-flex" style="font-size: 0.75vw;">
-                                          {{$homeNotification->date}} {{$homeNotification->batch}} , 
-                                          <!-- <span class="pl-2" id="timer" style="font-size: 0.75vw;"></span> -->
-                                          <!-- <span class="pl-2" id="countdown" style="font-size: 0.75vw;"></span> -->
-                                          <span id="countdown" class="pl-2">
-                                              <span id="timer" style="font-size: 0.75vw;"></span>
-                                          </span>
-                                        </div>
-                                    </li>
-                                    <li class="nav-item">
-                                        <div class="nav-link font-regular text-black font-400" style="font-size: 0.75vw;">New Batch Commencing {{$homeNotification->batch}}.</div>
-                                    </li>
-                                    <li class="nav-item">
-                                        <div class="nav-link font-regular text-black bold" style="font-size: 0.75vw;">Remaining Seats: {{$homeNotification->seat}}</div>
-                                    </li>
-                                </ul>
-                              @endif
-                            </nav>--}}
-                            <nav class="navbar navbar-expand-lg shadow-none px-0 py-1 home-announcement-bar">
-                              <div class="home-announcement-marquee" aria-label="Latest announcement">
-                                <div class="home-announcement-track">
-                                  <span class="home-announcement-text">New Fast Forward courses added. Go checkout Quickly !!</span>
-                                  <span class="home-announcement-text" aria-hidden="true">New Fast Forward courses added. Go checkout Quickly !!</span>
+                        <div class="col-md-9 pr-0 pl-1">
+                            <div class="home-announcement-wrap" style="margin-top: -0.24%;">
+                              <nav class="navbar navbar-expand-lg shadow-none px-0 py-1 home-announcement-bar">
+                                <div class="home-announcement-marquee" aria-label="Latest announcement">
+                                  <div class="home-announcement-track">
+                                    <span class="home-announcement-text">New Fast Forward courses added. Go checkout Quickly !!</span>
+                                    <span class="home-announcement-text" aria-hidden="true">New Fast Forward courses added. Go checkout Quickly !!</span>
+                                  </div>
                                 </div>
-                              </div>
-                            </nav>
+                              </nav>
+                            </div>
                         </div>
                         <div class="col-md-3 px-0">
                             <a href="{{url('register')}}">
@@ -1336,7 +1323,7 @@
                         @endphp
                       <div class="card home-course-slide" style="width:100%;">
                           <div class="home-course-card-shell">
-                            <div class="home-course-card-content">
+                            <div class="home-course-card-content" style="box-shadow: 2px 2px 2px 0 rgba(87, 87, 87, 0.1), 0 0 5px 0 rgba(255, 255, 255, 0.8);border: 1px solid rgba(87, 87, 87, 0.1);">
                             <div class="course-image">
                               <img src="{{ URL('/') }}/images/fastForwardCourse/{{ $row->image }}" alt="{{ $courseTitle }}">
                             </div>
