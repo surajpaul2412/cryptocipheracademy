@@ -1323,6 +1323,7 @@
                       @foreach($homeFastForwardCourses as $row)
                         @php
                           $courseTitle = trim('Fast Forward ' . $row->heading . ' ' . $row->subheading);
+                          $innerUrl = '/our-courses#fast-forward-course#' .$row->slug;
                           $detailUrl = $row->slug
                               ? route('fast-forward-courses.show', $row->slug)
                               : url('/our-courses');
@@ -1336,7 +1337,7 @@
                             <h3 class="course-title">{{ $courseTitle }}</h3>
                             <div class="course-footer">
                               <span class="duration">({{ $row->badge_text ?: '3 Months' }})</span>
-                              <a href="{{ $detailUrl }}" class="details-link home-course-details-link">DETAILS &rarr;</a>
+                              <a href="{{ $innerUrl }}" class="details-link home-course-details-link">DETAILS &rarr;</a>
                               <a href="/our-courses" class="details-link">DETAILS →</a>
                             </div>
                           </div>
