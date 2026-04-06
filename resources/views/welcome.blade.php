@@ -495,6 +495,12 @@
         overflow: hidden;
       }
 
+      body.home-welcome-page .home-course-carousel.slick-slider,
+      body.home-welcome-page .home-course-carousel.slick-initialized {
+        display: block !important;
+        margin: 0;
+      }
+
       body.home-welcome-page .home-course-carousel .slick-list,
       body.home-welcome-page .home-course-carousel .slick-track,
       body.home-welcome-page .home-course-carousel .slick-slide,
@@ -503,7 +509,7 @@
       }
 
       body.home-welcome-page .home-course-carousel .slick-list {
-        margin: 0 -5px;
+        margin: 0;
         padding: 1px 0;
       }
 
@@ -1313,7 +1319,7 @@
                           }
                       }
                     @endphp
-                    <div class="carousel-home w-100 d-flex align-items-center justify-content-center home-course-carousel">
+                    <div class="carousel-home w-100 home-course-carousel">
                       @foreach($homeFastForwardCourses as $row)
                         @php
                           $courseTitle = trim('Fast Forward ' . $row->heading . ' ' . $row->subheading);
@@ -1329,7 +1335,7 @@
                             </div>
                             <h3 class="course-title">{{ $courseTitle }}</h3>
                             <div class="course-footer">
-                              <span class="duration">3 Months</span>
+                              <span class="duration">({{ $row->badge_text ?: '3 Months' }})</span>
                               <a href="{{ $detailUrl }}" class="details-link home-course-details-link">DETAILS &rarr;</a>
                               <a href="/our-courses" class="details-link">DETAILS →</a>
                             </div>
