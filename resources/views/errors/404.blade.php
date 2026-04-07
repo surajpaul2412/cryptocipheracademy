@@ -33,15 +33,13 @@
       margin-bottom: 4px;
     }
     .home-announcement-bar{
-      min-height: 34px;
-      height: 5vh;
-      max-height: 40px;
+      min-height: 26px;
+      height: 3.6vh;
+      max-height: 30px;
       color: #ffffff;
       display: flex;
       align-items: center;
       overflow: hidden;
-      padding: 0 14px;
-      border-radius: 6px;
       border: 1px solid rgba(106, 153, 63, 0.35);
       background-color: #9ccd63;
       background-image: linear-gradient(90deg, #9ccd63 0%, #86c354 45%, #7cbf51 100%);
@@ -89,13 +87,19 @@
       justify-content: center;
       white-space: nowrap;
       color: #ffffff;
-      font-size: clamp(12px, 0.88vw, 15px);
+      font-size: clamp(11px, 0.82vw, 14px);
       font-weight: 700;
       line-height: 1.1;
       letter-spacing: 0.01em;
       text-align: center;
       padding: 0 12px;
       text-shadow: 0 1px 0 rgba(59, 88, 29, 0.18);
+    }
+    .inner-announcement-wrap{
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      margin-left: 1.5rem;
     }
     @keyframes homeAnnouncementScroll {
       0% { transform: translateX(0); }
@@ -563,14 +567,16 @@
         <div class="bg-theme1 inner-navbar mobile-d-none">
             <div class="row px-3 height-5 p-relative top-17p">
                 <div class="col-md-9 pr-0">
-                    <nav class="navbar navbar-expand-lg shadow-none px-0 py-1 home-announcement-bar mr-3">
-                      <div class="home-announcement-marquee" aria-label="Latest announcement">
-                        <div class="home-announcement-track">
-                          <span class="home-announcement-text">{{ $sharedAnnouncementText }}</span>
-                          <span class="home-announcement-text" aria-hidden="true">{{ $sharedAnnouncementText }}</span>
+                    <div class="inner-announcement-wrap">
+                      <nav class="navbar navbar-expand-lg shadow-none px-0 py-1 home-announcement-bar mr-3">
+                        <div class="home-announcement-marquee" aria-label="Latest announcement">
+                          <div class="home-announcement-track">
+                            <span class="home-announcement-text">{{ $sharedAnnouncementText }}</span>
+                            <span class="home-announcement-text" aria-hidden="true">{{ $sharedAnnouncementText }}</span>
+                          </div>
                         </div>
-                      </div>
-                    </nav>
+                      </nav>
+                    </div>
                 </div>
                 <div class="col-md-3 px-0">
                     <a href="{{url('register')}}">
