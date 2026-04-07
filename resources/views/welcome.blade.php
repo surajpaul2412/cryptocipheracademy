@@ -483,9 +483,51 @@
         overflow: hidden;
       }
 
+      body.home-welcome-page .home-hero-banner .owl-stage-outer,
+      body.home-welcome-page .home-hero-banner .owl-stage,
+      body.home-welcome-page .home-hero-banner .owl-item,
+      body.home-welcome-page .home-hero-banner .item,
+      body.home-welcome-page .home-hero-banner picture {
+        height: 100%;
+      }
+
+      body.home-welcome-page .home-hero-banner .item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      body.home-welcome-page .home-hero-banner .item::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: var(--home-banner-bg);
+        background-size: cover;
+        background-position: center;
+        filter: blur(14px);
+        transform: scale(1.08);
+        opacity: 0.42;
+      }
+
+      body.home-welcome-page .home-hero-banner picture {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
       body.home-welcome-page .home-hero-banner-image {
-        height: var(--home-banner-height) !important;
-        object-fit: cover;
+        display: block;
+        width: 100%;
+        height: 100% !important;
+        object-fit: contain;
+        object-position: center;
+        position: relative;
+        z-index: 1;
       }
 
       body.home-welcome-page .home-course-strip,
@@ -611,7 +653,7 @@
 
       body.home-welcome-page .course-footer {
         margin-top: auto;
-        padding-top: 8px;
+        padding-top: 3px;
         border-top: 1px solid rgba(22, 31, 45, 0.09);
       }
 
@@ -1450,7 +1492,7 @@
                       <div class="owl-slider" style="z-index: 1 !important;">
                         <div id="carousel" class="owl-carousel">
                           @foreach($banners as $index => $banner)
-                          <div class="item">
+                          <div class="item" style="--home-banner-bg: url('{{ env('image_url') }}/banner/{{$banner->image}}');">
                             <picture>
                               <source media="(max-width: 899.98px)" srcset="{{ env('image_url') }}/banner/{{ $banner->mobile_banner ?: $banner->image }}">
                               <img alt="Banner" class="home-hero-banner-image" src="{{env('image_url')}}/banner/{{$banner->image}}" width="100%">
