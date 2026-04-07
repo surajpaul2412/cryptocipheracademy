@@ -846,8 +846,8 @@
 
       body.home-welcome-page .home-course-card-content {
         width: 100%;
-        padding: 8px 8px 10px;
-        gap: 8px;
+        padding: 9px 8px 10px;
+        gap: 0;
         height: 100%;
       }
 
@@ -875,13 +875,33 @@
         font-size: clamp(0.82rem, 3.2vw, 1rem);
         line-height: 1.24;
         min-height: 2.48em;
+        margin-top: 8px;
+        margin-bottom: 0;
         overflow-wrap: anywhere;
         word-break: break-word;
       }
 
       body.home-welcome-page .course-footer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
         padding-top: 8px;
-        gap: 6px;
+        gap: 8px;
+      }
+
+      body.home-welcome-page .duration {
+        display: block;
+        width: 100%;
+        text-align: center;
+        white-space: nowrap;
+      }
+
+      body.home-welcome-page .home-course-details-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        align-self: center;
       }
 
       body.home-welcome-page .duration,
