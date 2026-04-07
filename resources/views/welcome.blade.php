@@ -607,7 +607,7 @@
 
       body.home-welcome-page .course-footer {
         margin-top: auto;
-        padding-top: 10px;
+        padding-top: 4px;
         border-top: 1px solid rgba(22, 31, 45, 0.09);
       }
 
