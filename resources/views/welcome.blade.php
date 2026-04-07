@@ -560,11 +560,12 @@
         display: flex;
         flex-direction: column;
         padding: 5px 6px;
-        gap: 10px;
+        gap: 0;
       }
 
       body.home-welcome-page .course-image {
-        height: min(108px, 13.4vh);
+        flex: 0 0 min(126px, 15.2vh);
+        height: min(126px, 15.2vh);
         margin-bottom: 0;
         overflow: hidden;
         border-radius: 12px;
@@ -580,12 +581,15 @@
 
       body.home-welcome-page .course-title {
         font-size: clamp(13px, 0.98vw, 18px);
-        /* line-height: 1.16; */
-        /* min-height: 2.32em; */
+        flex: 1 1 auto;
+        display: flex;
+        align-items: center;
         overflow: hidden;
-        margin-bottom: 0;
+        margin: 0;
+        padding: 8px 0;
         color: #1f2733;
         font-weight: 700;
+        line-height: 1.18;
         letter-spacing: -0.02em;
       }
 
@@ -607,7 +611,7 @@
 
       body.home-welcome-page .course-footer {
         margin-top: auto;
-        padding-top: 4px;
+        padding-top: 8px;
         border-top: 1px solid rgba(22, 31, 45, 0.09);
       }
 
@@ -879,6 +883,7 @@
         margin-bottom: 0;
         overflow-wrap: anywhere;
         word-break: break-word;
+        text-align: center;
       }
 
       body.home-welcome-page .course-footer {
@@ -1283,7 +1288,7 @@
                     <div class="row px-3" style="position: relative;top: 31%;height: 5vh">
                         <div class="col-md-9 pr-0 pl-1">
                             <div class="home-announcement-wrap" style="margin-top: -0.24%;">
-                              <nav class="navbar navbar-expand-lg shadow-none px-0 py-1 home-announcement-bar">
+                              <nav class="navbar navbar-expand-lg shadow-none px-0 py-1 home-announcement-bar mr-3">
                                 <div class="home-announcement-marquee" aria-label="Latest announcement">
                                   <div class="home-announcement-track">
                                     <span class="home-announcement-text">{{ $sharedAnnouncementText }}</span>
@@ -1476,7 +1481,7 @@
                     <div class="carousel-home w-100 home-course-carousel">
                       @foreach($homeFastForwardCourses as $row)
                         @php
-                          $courseTitle = trim('Fast Forward ' . $row->heading . ' ' . $row->subheading);
+                          $courseTitle = trim('Fast Forward ' . $row->heading);
                           $innerUrl = '/our-courses#fast-forward-course#' .$row->slug;
                           $detailUrl = $row->slug
                               ? route('fast-forward-courses.show', $row->slug)
