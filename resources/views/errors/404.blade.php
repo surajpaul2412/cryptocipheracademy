@@ -322,14 +322,9 @@
               <div class="marquee bg-theme2 text-white mt-2">
                 <div>
                   <span class="font-regular">
-                    New Batch Commencing April , 2021. | Remaining Seats: 8 | 
-                    New Batch Commencing April , 2021. | Remaining Seats: 8 | 
-                    New Batch Commencing April , 2021. | Remaining Seats: 8 | 
-                    New Batch Commencing April , 2021. | Remaining Seats: 8 | 
-                    New Batch Commencing April , 2021. | Remaining Seats: 8 | 
-                    New Batch Commencing April , 2021. | Remaining Seats: 8 | 
-                    New Batch Commencing April , 2021. | Remaining Seats: 8 | 
-                    New Batch Commencing April , 2021. | Remaining Seats: 8 | 
+                    @for ($i = 0; $i < 10; $i++)
+                      {{ $sharedAnnouncementText }} |
+                    @endfor
                   </span>
                 </div>
               </div>
@@ -571,8 +566,8 @@
                     <nav class="navbar navbar-expand-lg shadow-none px-0 py-1 home-announcement-bar">
                       <div class="home-announcement-marquee" aria-label="Latest announcement">
                         <div class="home-announcement-track">
-                          <span class="home-announcement-text">New Fast Forward courses added. Go checkout Quickly !!</span>
-                          <span class="home-announcement-text" aria-hidden="true">New Fast Forward courses added. Go checkout Quickly !!</span>
+                          <span class="home-announcement-text">{{ $sharedAnnouncementText }}</span>
+                          <span class="home-announcement-text" aria-hidden="true">{{ $sharedAnnouncementText }}</span>
                         </div>
                       </div>
                     </nav>

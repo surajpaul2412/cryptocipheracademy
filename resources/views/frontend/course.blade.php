@@ -27,7 +27,7 @@
     .course-page-tabs .js-course-tab.active .page-12-btn {
         background-color: #7cbf51;
         background-image: linear-gradient(to right, #74b84b, #7cbf51);
-        box-shadow: 0 10px 22px rgba(124, 191, 81, 0.34);
+        box-shadow: 0 0px 22px rgba(124, 191, 81, 0.34);
         color: #ffffff;
         transform: translateY(-1px);
     }
