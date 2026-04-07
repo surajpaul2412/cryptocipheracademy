@@ -756,19 +756,45 @@
     }
 
     @media screen and (max-width: 899.98px) {
+      html,
+      body.home-welcome-page {
+        overflow-x: hidden;
+      }
+
+      body.home-welcome-page .home-primary-panel {
+        overflow: hidden;
+      }
+
+      body.home-welcome-page .home-hero-banner {
+        height: auto;
+        overflow: hidden;
+      }
+
+      body.home-welcome-page .home-hero-banner picture,
+      body.home-welcome-page .home-hero-banner-image {
+        display: block;
+        width: 100%;
+      }
+
       body.home-welcome-page .home-course-strip {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
         height: auto !important;
         max-height: none;
-        padding: 14px 0 6px;
-        overflow: visible;
+        padding: 12px 0 4px;
+        overflow: hidden;
       }
 
       body.home-welcome-page .home-course-carousel,
       body.home-welcome-page .home-course-carousel.slick-slider,
       body.home-welcome-page .home-course-carousel.slick-initialized {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
         height: auto !important;
         max-height: none;
-        overflow: visible;
+        overflow: hidden;
       }
 
       body.home-welcome-page .home-course-carousel .slick-list,
@@ -780,44 +806,59 @@
       }
 
       body.home-welcome-page .home-course-carousel .slick-list {
-        margin: 0 -6px;
-        padding: 8px 6px 12px;
-        overflow: visible;
+        margin: 0;
+        padding: 8px 0 12px;
+        overflow: hidden;
       }
 
       body.home-welcome-page .home-course-carousel .slick-track {
-        display: block;
+        display: flex !important;
+        align-items: stretch;
       }
 
       body.home-welcome-page .home-course-carousel .slick-slide {
         margin: 0;
-        padding: 0 6px;
+        padding: 0 4px;
+        box-sizing: border-box;
+        height: inherit !important;
+      }
+
+      body.home-welcome-page .home-course-carousel .slick-slide > div {
+        display: block;
+        height: 100%;
       }
 
       body.home-welcome-page .home-course-slide {
+        width: 100% !important;
         height: auto !important;
         max-height: none;
-        overflow: visible;
+        overflow: hidden;
         background: transparent;
         box-shadow: none;
       }
 
       body.home-welcome-page .home-course-card-shell {
+        display: block;
+        width: 100%;
         border-radius: 16px;
+        height: 100%;
       }
 
       body.home-welcome-page .home-course-card-content {
-        padding: 10px 10px 12px;
-        gap: 10px;
+        width: 100%;
+        padding: 8px 8px 10px;
+        gap: 8px;
+        height: 100%;
       }
 
       body.home-welcome-page .course-image {
         position: relative;
         display: block;
-        height: clamp(160px, 48vw, 205px);
-        min-height: 160px;
-        max-height: 205px;
-        border-radius: 14px;
+        width: 100%;
+        height: clamp(92px, 28vw, 128px);
+        min-height: 92px;
+        max-height: 128px;
+        border-radius: 12px;
         overflow: hidden;
         background: #eef2f7;
       }
@@ -831,17 +872,22 @@
       }
 
       body.home-welcome-page .course-title {
-        font-size: 1.6rem;
-        line-height: 1.18;
+        font-size: clamp(0.82rem, 3.2vw, 1rem);
+        line-height: 1.24;
+        min-height: 2.48em;
+        overflow-wrap: anywhere;
+        word-break: break-word;
       }
 
       body.home-welcome-page .course-footer {
-        padding-top: 9px;
+        padding-top: 8px;
+        gap: 6px;
       }
 
       body.home-welcome-page .duration,
       body.home-welcome-page .details-link {
-        font-size: 12px;
+        font-size: 10px;
+        letter-spacing: 0.08em;
       }
     }
     </style>
@@ -1380,7 +1426,10 @@
                         <div id="carousel" class="owl-carousel">
                           @foreach($banners as $index => $banner)
                           <div class="item">
-                            <img alt="Banner" class="home-hero-banner-image" src="{{env('image_url')}}/banner/{{$banner->image}}" width="100%">
+                            <picture>
+                              <source media="(max-width: 899.98px)" srcset="{{ env('image_url') }}/banner/{{ $banner->mobile_banner ?: $banner->image }}">
+                              <img alt="Banner" class="home-hero-banner-image" src="{{env('image_url')}}/banner/{{$banner->image}}" width="100%">
+                            </picture>
                           </div>
                           @endforeach
                         </div>
@@ -1949,7 +1998,7 @@ $(document).ready(function(){
 
   if ($homeCarousel.length && homeSlideCount) {
     var homeDesktopSlides = Math.min(3, homeSlideCount);
-    var homeMobileSlides = 1;
+    var homeMobileSlides = Math.min(2, homeSlideCount);
 
     $homeCarousel.slick({
       speed: 500,
