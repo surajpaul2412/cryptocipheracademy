@@ -563,7 +563,7 @@
         <div class="bg-theme1 inner-navbar mobile-d-none">
             <div class="row px-3 height-5 p-relative top-17p">
                 <div class="col-md-9 pr-0">
-                    <nav class="navbar navbar-expand-lg shadow-none px-0 py-1 home-announcement-bar">
+                    <nav class="navbar navbar-expand-lg shadow-none px-0 py-1 home-announcement-bar mr-3">
                       <div class="home-announcement-marquee" aria-label="Latest announcement">
                         <div class="home-announcement-track">
                           <span class="home-announcement-text">{{ $sharedAnnouncementText }}</span>
