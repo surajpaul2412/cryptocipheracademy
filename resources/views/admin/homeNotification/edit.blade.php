@@ -55,6 +55,11 @@
           </div>
 
           <div class="form-group">
+              <label class="text-dark" for="floating_message">Floating Message :</label>
+              <textarea class="form-control" name="floating_message" rows="4">{{$homeNotification->floating_message}}</textarea>
+          </div>
+
+          <div class="form-group">
               <label class="text-dark" for="register_date1">Registration Date 1 :</label>
               <input type="text" class="form-control" name="register_date1" value="{{$homeNotification->register_date1}}" />
           </div>

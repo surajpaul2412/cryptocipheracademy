@@ -1908,10 +1908,14 @@
       </a>
     </div>
     <!-- alert notification -->
-    @if(!empty($homeNotification->notify_text))
+    @php
+      $floatingMessage = trim((string) optional($homeNotification)->floating_message);
+      $floatingMessage = $floatingMessage !== '' ? $floatingMessage : trim((string) optional($homeNotification)->notify_text);
+    @endphp
+    @if($floatingMessage !== '')
     <div id="floating-notification" class="mobile-d-none" align="center" style="width:160px;position: absolute;bottom: 110px;right: 40px;background-color: #25d366;border-radius: 8px;">
       <div class="pt-3 pb-2 px-2 font-13 font-regular">
-        {{$homeNotification->notify_text}}
+        {{$floatingMessage}}
         <div class="mt-3 py-2 text-white font-regular" id="click-notification" style="border-radius: 28px;background-color: #106731;cursor: pointer;">
           I Got It.
         </div>
@@ -1920,7 +1924,7 @@
 
     <div id="floating-notification" class="desktop-d-none native-btn-mobile" align="center" style="width:160px;position: fixed;bottom: 110px;right: 40px;background-color: #25d366;border-radius: 8px;">
       <div class="pt-3 pb-2 px-2 font-13 font-regular">
-        {{$homeNotification->notify_text}}
+        {{$floatingMessage}}
         <div class="mt-3 py-2 text-white font-regular native-btn-mobile" id="click-notification" style="border-radius: 28px;background-color: #106731;cursor: pointer;">
           I Got It.
         </div>
