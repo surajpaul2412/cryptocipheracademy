@@ -542,7 +542,7 @@ $desktopMenu = DesktopMenuSection::orderBy('sort_by', "asc")->get();
                 <div>
                   <span class="font-regular">
                     @for ($i = 0; $i < 10; $i++)
-                      {{ $sharedAnnouncementText }} |
+                      {!! $sharedAnnouncementText !!} |
                     @endfor
                   </span>
                 </div>
@@ -719,8 +719,8 @@ $desktopMenu = DesktopMenuSection::orderBy('sort_by', "asc")->get();
                     <nav class="navbar navbar-expand-lg shadow-none px-0 py-1 home-announcement-bar mr-3">
                       <div class="home-announcement-marquee" aria-label="Latest announcement">
                         <div class="home-announcement-track">
-                          <span class="home-announcement-text">{{ $sharedAnnouncementText }}</span>
-                          <span class="home-announcement-text" aria-hidden="true">{{ $sharedAnnouncementText }}</span>
+                          <span class="home-announcement-text">{!! $sharedAnnouncementText !!}</span>
+                          <span class="home-announcement-text" aria-hidden="true">{!! $sharedAnnouncementText !!}</span>
                         </div>
                       </div>
                     </nav>
