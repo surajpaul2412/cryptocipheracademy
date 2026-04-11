@@ -492,10 +492,22 @@
         overflow: hidden;
       }
 
+      body.home-welcome-page .home-primary-panel {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+
       body.home-welcome-page .home-hero-banner {
-        height: var(--home-banner-height) !important;
-        max-height: var(--home-banner-height);
+        flex: 0 0 auto;
+        height: auto !important;
+        max-height: none;
+        aspect-ratio: 1838 / 576;
         overflow: hidden;
+      }
+
+      body.home-welcome-page .home-hero-banner .owl-slider {
+        height: 100%;
       }
 
       body.home-welcome-page .home-hero-banner .owl-stage-outer,
@@ -547,9 +559,20 @@
 
       body.home-welcome-page .home-course-strip,
       body.home-welcome-page .home-course-carousel {
-        height: var(--home-course-height) !important;
-        max-height: var(--home-course-height);
         overflow: hidden;
+      }
+
+      body.home-welcome-page .home-course-strip {
+        flex: 1 1 auto;
+        min-height: 0;
+        height: auto !important;
+        max-height: none;
+        align-items: stretch;
+      }
+
+      body.home-welcome-page .home-course-carousel {
+        height: 100% !important;
+        max-height: none;
       }
 
       body.home-welcome-page .home-course-carousel.slick-slider,
@@ -567,12 +590,13 @@
 
       body.home-welcome-page .home-course-carousel .slick-list {
         margin: 0;
-        padding: 1px 0;
+        padding: 3px 0;
+        box-sizing: border-box;
       }
 
       body.home-welcome-page .home-course-carousel .slick-track {
         display: flex;
-        align-items: center;
+        align-items: stretch;
       }
 
       body.home-welcome-page .home-course-carousel .slick-slide {
@@ -582,13 +606,13 @@
 
       body.home-welcome-page .home-course-carousel .slick-slide > div {
         display: flex;
-        align-items: center;
+        align-items: stretch;
         width: 100%;
       }
 
       body.home-welcome-page .home-course-slide {
-        height: var(--home-course-card-height) !important;
-        max-height: var(--home-course-card-height);
+        height: 100% !important;
+        max-height: none;
         display: block !important;
         overflow: hidden;
         padding: 0 !important;
@@ -621,8 +645,9 @@
       }
 
       body.home-welcome-page .course-image {
-        flex: 0 0 min(126px, 15.2vh);
-        height: min(126px, 15.2vh);
+        flex: 1 1 auto;
+        min-height: clamp(116px, 13.8vh, 168px);
+        height: auto;
         margin-bottom: 0;
         overflow: hidden;
         border-radius: 12px;
@@ -638,7 +663,7 @@
 
       body.home-welcome-page .course-title {
         font-size: clamp(13px, 0.98vw, 18px);
-        flex: 1 1 auto;
+        flex: 0 0 auto;
         display: flex;
         align-items: center;
         overflow: hidden;
@@ -692,6 +717,11 @@
         height: var(--home-links-height) !important;
         max-height: var(--home-links-height);
         overflow: hidden;
+      }
+
+      body.home-welcome-page .home-links-block {
+        flex: 0 0 var(--home-links-height);
+        min-height: var(--home-links-height);
       }
 
       body.home-welcome-page .home-links-row > div {
@@ -1524,7 +1554,7 @@
                     @endif
                   </div>
                   <!-- section 2 -->
-                  <div class="d-flex align-items-center home-course-strip">
+                  <div class="d-flex home-course-strip">
                     @php
                       $homeFastForwardCourses = collect($fastForwardCourses ?? [])->values();
                       if ($homeFastForwardCourses->count() > 0 && $homeFastForwardCourses->count() < 3) {
