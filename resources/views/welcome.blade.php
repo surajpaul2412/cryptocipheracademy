@@ -159,9 +159,14 @@
         overflow: hidden;
         animation: marquee 5s linear infinite;
       }
-      .marquee span {
+      .marquee > div > span {
         float: left;
         width: 50%;
+      }
+      .marquee > div > span * {
+        float: none !important;
+        width: auto !important;
+        display: inline !important;
       }
       @keyframes marquee {
         0% { left: 0; }
@@ -304,6 +309,16 @@
       }
       #floating-notification{
         animation: float 6s ease-in-out infinite;
+        z-index: 9995;
+      }
+      @media screen and (max-width: 767.98px) {
+        #floating-notification.desktop-d-none{
+          position: fixed !important;
+          right: 14px !important;
+          bottom: 100px !important;
+          z-index: 99999 !important;
+          width: min(160px, calc(100vw - 28px)) !important;
+        }
       }
       @keyframes float {
       0% {
@@ -763,9 +778,7 @@
 
       body.home-welcome-page .home-announcement-text {
         flex: 0 0 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        display: block;
         white-space: nowrap;
         color: #ffffff;
         font-size: clamp(11px, 0.82vw, 14px);
@@ -775,6 +788,12 @@
         text-align: center;
         padding: 0 12px;
         text-shadow: 0 1px 0 rgba(59, 88, 29, 0.18);
+      }
+
+      body.home-welcome-page .home-announcement-text * {
+        float: none !important;
+        width: auto !important;
+        display: inline !important;
       }
 
       body.home-welcome-page .home-announcement-wrap {

@@ -82,9 +82,7 @@
     }
     .home-announcement-text{
       flex: 0 0 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: block;
       white-space: nowrap;
       color: #ffffff;
       font-size: clamp(11px, 0.82vw, 14px);
@@ -94,6 +92,11 @@
       text-align: center;
       padding: 0 12px;
       text-shadow: 0 1px 0 rgba(59, 88, 29, 0.18);
+    }
+    .home-announcement-text *{
+      float: none !important;
+      width: auto !important;
+      display: inline !important;
     }
     .inner-announcement-wrap{
       position: relative;
@@ -138,9 +141,14 @@
       overflow: hidden;
       animation: marquee 5s linear infinite;
     }
-    .marquee span {
+    .marquee > div > span {
       float: left;
       width: 50%;
+    }
+    .marquee > div > span * {
+      float: none !important;
+      width: auto !important;
+      display: inline !important;
     }
     @keyframes marquee {
       0% { left: 0; }
