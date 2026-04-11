@@ -643,6 +643,7 @@
         flex-direction: column;
         padding: 5px 6px;
         gap: 0;
+        font-family: 'Roboto-Regular';
       }
 
       body.home-welcome-page .course-image {
@@ -667,13 +668,16 @@
         flex: 0 0 auto;
         display: flex;
         align-items: center;
+        justify-content: center;
         overflow: hidden;
         margin: 0;
         padding: 8px 0;
         color: #1f2733;
         font-weight: 700;
+        font-family: 'Roboto-Bold';
         line-height: 1.18;
         letter-spacing: -0.02em;
+        text-align: center;
       }
 
       body.home-welcome-page .course-description {
@@ -701,12 +705,18 @@
       body.home-welcome-page .duration {
         font-weight: 700;
         color: #303846;
+        font-family: 'Roboto-Regular';
       }
 
       body.home-welcome-page .home-course-details-link {
         font-weight: 700;
         color: #1f2733;
         letter-spacing: 0.14em;
+        font-family: 'Roboto-Bold';
+      }
+
+      body.home-welcome-page .details-link {
+        font-family: 'Roboto-Bold';
       }
 
       body.home-welcome-page .home-course-card-content .course-footer > a.details-link:not(.home-course-details-link) {
