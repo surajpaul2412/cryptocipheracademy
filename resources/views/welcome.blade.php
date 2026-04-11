@@ -598,11 +598,16 @@
         display: flex;
         align-items: stretch;
         margin-top: -1%;
+        will-change: transform;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
       }
 
       body.home-welcome-page .home-course-carousel .slick-slide {
         padding: 0 5px;
         box-sizing: border-box;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
       }
 
       body.home-welcome-page .home-course-carousel .slick-slide > div {
@@ -2152,15 +2157,20 @@ $(document).ready(function(){
     var homeMobileSlides = Math.min(2, homeSlideCount);
 
     $homeCarousel.slick({
-      speed: 500,
+      speed: 700,
       slidesToShow: homeDesktopSlides,
       slidesToScroll: 1,
       autoplay: homeSlideCount > homeDesktopSlides,
-      autoplaySpeed: 2000,
+      autoplaySpeed: 2600,
       dots: false,
       arrows: false,
       infinite: homeSlideCount > homeDesktopSlides,
       centerMode: false,
+      cssEase: 'ease-in-out',
+      pauseOnHover: false,
+      pauseOnFocus: false,
+      waitForAnimate: false,
+      useTransform: true,
       responsive: [
           {
               breakpoint: 1024,
@@ -2169,6 +2179,12 @@ $(document).ready(function(){
                   slidesToScroll: 1,
                   autoplay: homeSlideCount > homeDesktopSlides,
                   infinite: homeSlideCount > homeDesktopSlides,
+                  speed: 700,
+                  autoplaySpeed: 2600,
+                  cssEase: 'ease-in-out',
+                  pauseOnHover: false,
+                  pauseOnFocus: false,
+                  waitForAnimate: false,
               }
           },
           {
@@ -2178,6 +2194,12 @@ $(document).ready(function(){
                   slidesToScroll: 1,
                   autoplay: homeSlideCount > homeMobileSlides,
                   infinite: homeSlideCount > homeMobileSlides,
+                  speed: 600,
+                  autoplaySpeed: 2200,
+                  cssEase: 'ease-in-out',
+                  pauseOnHover: false,
+                  pauseOnFocus: false,
+                  waitForAnimate: false,
               }
           }
       ]
