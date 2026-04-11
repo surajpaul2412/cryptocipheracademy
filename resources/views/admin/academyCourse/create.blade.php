@@ -35,19 +35,33 @@
           @csrf
           <div class="form-group">
               <label class="text-dark" for="heading">Heading :</label>
-              <input type="text" class="form-control" name="heading"/>
+              <input type="text" class="form-control" name="heading" value="{{ old('heading') }}"/>
           </div>
           <div class="form-group">
               <label class="text-dark" for="content">Content :</label>
-              <textarea id="summernote" class="form-control" name="content"></textarea>
+              <textarea id="summernote" class="form-control" name="content">{{ old('content') }}</textarea>
           </div>
           <div class="form-group">
               <label class="text-dark" for="url">Button url :</label>
-              <input type="text" class="form-control" name="url"/>
+              <input type="text" class="form-control" name="url" value="{{ old('url') }}"/>
           </div>
           <div class="form-group">
               <label class="text-dark" for="image">Icon :</label>
               <input type="file" class="form-control" name="image"/>
+          </div>
+          <hr>
+          <div class="form-group">
+              <label class="text-dark" for="slider_heading">Home Slider Heading :</label>
+              <input type="text" class="form-control" name="slider_heading" value="{{ old('slider_heading') }}"/>
+          </div>
+          <div class="form-group">
+              <label class="text-dark" for="slider_duration">Home Slider Duration :</label>
+              <input type="text" class="form-control" name="slider_duration" value="{{ old('slider_duration') }}" placeholder="Example: 12 Months"/>
+          </div>
+          <div class="form-group">
+              <label class="text-dark" for="banner_image">Home Slider Banner Image :</label>
+              <input type="file" class="form-control" name="banner_image"/>
+              <small class="text-muted">Upload this image if you want this main course to appear in the home page slider after Fast Forward courses.</small>
           </div>
           <button type="submit" class="btn btn-primary">Add Download</button>
       </form>

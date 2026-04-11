@@ -1567,13 +1567,40 @@
                   <!-- section 2 -->
                   <div class="d-flex home-course-strip">
                     @php
-                      $homeFastForwardCourses = collect($fastForwardCourses ?? [])->values();
-                      if ($homeFastForwardCourses->count() > 0 && $homeFastForwardCourses->count() < 3) {
-                          $initialHomeFastForwardCourses = $homeFastForwardCourses->values();
-                          while ($homeFastForwardCourses->count() < 3) {
-                              foreach ($initialHomeFastForwardCourses as $fastForwardCourse) {
-                                  $homeFastForwardCourses->push($fastForwardCourse);
-                                  if ($homeFastForwardCourses->count() >= 3) {
+                      $homeFastForwardSlides = collect($fastForwardCourses ?? [])->map(function ($row) {
+                          return [
+                              'title' => trim('Fast Forward ' . $row->heading),
+                              'image' => URL('/') . '/images/fastForwardCourse/' . $row->image,
+                              'duration' => $row->badge_text ?: '3 Months',
+                              'link' => $row->slug
+                                  ? url('/our-courses#fast-forward-course#' . $row->slug)
+                                  : url('/our-courses#fast-forward-course'),
+                          ];
+                      });
+
+                      $homeMainCourseSlides = collect($homeMainCourses ?? [])->filter(function ($row) {
+                          return !empty($row->banner_image);
+                      })->map(function ($row) {
+                          return [
+                              'title' => trim($row->slider_heading ?: $row->heading),
+                              'image' => URL('/') . '/images/academyCourse/' . $row->banner_image,
+                              'duration' => $row->slider_duration ?: 'Main Course',
+                              'link' => trim((string) $row->url) !== ''
+                                  ? $row->url
+                                  : url('/our-courses'),
+                          ];
+                      });
+
+                      $homeSliderCourses = $homeFastForwardSlides
+                          ->concat($homeMainCourseSlides)
+                          ->values();
+
+                      if ($homeSliderCourses->count() > 0 && $homeSliderCourses->count() < 3) {
+                          $initialHomeSliderCourses = $homeSliderCourses->values();
+                          while ($homeSliderCourses->count() < 3) {
+                              foreach ($initialHomeSliderCourses as $homeSliderCourse) {
+                                  $homeSliderCourses->push($homeSliderCourse);
+                                  if ($homeSliderCourses->count() >= 3) {
                                       break;
                                   }
                               }
@@ -1581,24 +1608,17 @@
                       }
                     @endphp
                     <div class="carousel-home w-100 home-course-carousel">
-                      @foreach($homeFastForwardCourses as $row)
-                        @php
-                          $courseTitle = trim('Fast Forward ' . $row->heading);
-                          $innerUrl = '/our-courses#fast-forward-course#' .$row->slug;
-                          $detailUrl = $row->slug
-                              ? route('fast-forward-courses.show', $row->slug)
-                              : url('/our-courses');
-                        @endphp
+                      @foreach($homeSliderCourses as $slide)
                       <div class="card home-course-slide" style="width:100%;">
                           <div class="home-course-card-shell">
                             <div class="home-course-card-content" style="box-shadow: 2px 2px 2px 0 rgba(87, 87, 87, 0.1), 0 0 5px 0 rgba(255, 255, 255, 0.8);border: 1px solid rgba(87, 87, 87, 0.1);">
                             <div class="course-image">
-                              <img src="{{ URL('/') }}/images/fastForwardCourse/{{ $row->image }}" alt="{{ $courseTitle }}">
+                              <img src="{{ $slide['image'] }}" alt="{{ $slide['title'] }}">
                             </div>
-                            <h3 class="course-title">{{ $courseTitle }}</h3>
+                            <h3 class="course-title">{{ $slide['title'] }}</h3>
                             <div class="course-footer">
-                              <span class="duration">({{ $row->badge_text ?: '3 Months' }})</span>
-                              <a href="{{ $innerUrl }}" class="details-link home-course-details-link">DETAILS &rarr;</a>
+                              <span class="duration">({{ $slide['duration'] }})</span>
+                              <a href="{{ $slide['link'] }}" class="details-link home-course-details-link">DETAILS &rarr;</a>
                               <a href="/our-courses" class="details-link">DETAILS →</a>
                             </div>
                           </div>

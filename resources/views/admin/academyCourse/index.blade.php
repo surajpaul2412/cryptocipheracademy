@@ -31,6 +31,9 @@
         <tr>
           <th>S. no</th>
           <th>Heading</th>
+          <th>Slider Heading</th>
+          <th>Slider Duration</th>
+          <th>Home Slider</th>
           <th>Content</th>
           <th>Url</th>
           <th>Edit</th>
@@ -42,6 +45,9 @@
       <tr>
         <th>{{$index+1}}.</th>
         <td class="bold">{{$row->heading}}</td>
+        <td>{{ $row->slider_heading ?: '-' }}</td>
+        <td>{{ $row->slider_duration ?: '-' }}</td>
+        <td>{{ $row->banner_image ? 'Yes' : 'No' }}</td>
         <td>{{ \Illuminate\Support\Str::limit($row->content, 50, $end='...') }}</td>
         <td>{{$row->url}}</td>
         <td>

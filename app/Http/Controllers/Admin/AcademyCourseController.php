@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\AcademyCourse;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\AcademyCourse;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class AcademyCourseController extends Controller
 {
@@ -16,6 +18,7 @@ class AcademyCourseController extends Controller
     public function index()
     {
         $academyCourse = AcademyCourse::all();
+
         return view('admin.academyCourse.index', compact('academyCourse'));
     }
 
@@ -37,26 +40,14 @@ class AcademyCourseController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'image'=> 'required',
-            'heading'=> 'required|min:3|max:255',
-            'content'=> 'required|min:3',
-            'url'=> 'nullable',
-        ]);
+        $validated = $this->validateRequest($request, true);
+        $validated['image'] = $this->uploadImage($request->file('image'));
+        $validated['banner_image'] = $request->hasFile('banner_image')
+            ? $this->uploadImage($request->file('banner_image'))
+            : null;
 
-        $image_name = $request->image;
-        $image = $request->file('image');
-        if($image != ''){
-            $image_name = rand() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images/academyCourse'), $image_name);
-        }
+        AcademyCourse::create($validated);
 
-        $academyCourse = new AcademyCourse();
-        $academyCourse->heading = $request->heading;
-        $academyCourse->content = $request->content;
-        $academyCourse->image = $image_name;
-        $academyCourse->url = $request->url;
-        $academyCourse->save();
         return redirect('/admin/academyCourse')->with('success', 'Course has been added.');
     }
 
@@ -80,6 +71,7 @@ class AcademyCourseController extends Controller
     public function edit($id)
     {
         $academyCourse = AcademyCourse::findOrFail($id);
+
         return view('admin.academyCourse.edit', compact('academyCourse'));
     }
 
@@ -92,33 +84,23 @@ class AcademyCourseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $image_name = $request->hidden_image;
-        $image = $request->file('image');
-        if($image != ''){
-            $request->validate([
-                'image'=> 'required',
-                'heading'=> 'required|min:3|max:255',
-                'content'=> 'required|min:3',
-                'url'=> 'nullable',
-            ]);
-            $image_name = rand() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images/academyCourse'), $image_name);
-        } else{
-            $request->validate([
-                'heading'=> 'required|min:3|max:255',
-                'content'=> 'required|min:3',
-                'url'=> 'nullable',
-            ]);
+        $academyCourse = AcademyCourse::findOrFail($id);
+        $validated = $this->validateRequest($request, false);
+
+        if ($request->hasFile('image')) {
+            $validated['image'] = $this->uploadImage($request->file('image'), $academyCourse->image);
+        } else {
+            $validated['image'] = $academyCourse->image;
         }
 
-        $form_data = array(
-            'heading' => $request->heading,
-            'content' => $request->content,
-            'url' => $request->url,
-            'image' => $image_name
-        );
+        if ($request->hasFile('banner_image')) {
+            $validated['banner_image'] = $this->uploadImage($request->file('banner_image'), $academyCourse->banner_image);
+        } else {
+            $validated['banner_image'] = $academyCourse->banner_image;
+        }
 
-        AcademyCourse::whereId($id)->update($form_data);
+        $academyCourse->update($validated);
+
         return redirect('/admin/academyCourse')->with('success', 'Course has been updated.');
     }
 
@@ -131,7 +113,59 @@ class AcademyCourseController extends Controller
     public function destroy($id)
     {
         $academyCourse = AcademyCourse::findOrFail($id);
+        $this->deleteImage($academyCourse->image);
+        $this->deleteImage($academyCourse->banner_image);
         $academyCourse->delete();
+
         return redirect('/admin/academyCourse')->with('success', 'Course has been deleted successfully.');
+    }
+
+    private function validateRequest(Request $request, bool $iconRequired): array
+    {
+        $rules = [
+            'heading' => 'required|string|min:3|max:255',
+            'content' => 'required|string|min:3',
+            'url' => 'nullable|string|max:255',
+            'slider_heading' => 'nullable|string|max:255',
+            'slider_duration' => 'nullable|string|max:255',
+            'banner_image' => 'nullable|image|max:4096',
+        ];
+
+        $rules['image'] = $iconRequired
+            ? 'required|image|max:2048'
+            : 'nullable|image|max:2048';
+
+        return $request->validate($rules);
+    }
+
+    private function uploadImage($image, ?string $currentImage = null): string
+    {
+        $directory = public_path('images/academyCourse');
+
+        if (!File::exists($directory)) {
+            File::makeDirectory($directory, 0755, true);
+        }
+
+        if ($currentImage) {
+            $this->deleteImage($currentImage);
+        }
+
+        $imageName = Str::random(20) . '_' . time() . '.' . $image->getClientOriginalExtension();
+        $image->move($directory, $imageName);
+
+        return $imageName;
+    }
+
+    private function deleteImage(?string $imageName): void
+    {
+        if (!$imageName) {
+            return;
+        }
+
+        $imagePath = public_path('images/academyCourse/' . $imageName);
+
+        if (File::exists($imagePath)) {
+            File::delete($imagePath);
+        }
     }
 }

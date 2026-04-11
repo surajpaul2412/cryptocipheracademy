@@ -31,11 +31,11 @@
         @csrf
         <div class="form-group">
           <label class="text-dark" for="heading">Heading :</label>
-          <input type="text" class="form-control" name="heading" value="{{ $academyCourse->heading }}"/>
+          <input type="text" class="form-control" name="heading" value="{{ old('heading', $academyCourse->heading) }}"/>
         </div>
         <div class="form-group">
           <label class="text-dark" for="content">Content :</label>
-          <textarea id="summernote" class="form-control" name="content">{{ $academyCourse->content }}</textarea>
+          <textarea id="summernote" class="form-control" name="content">{{ old('content', $academyCourse->content) }}</textarea>
         </div>
         <label class="text-dark" for="image">Upload Icon:</label>
         <div class="form-group input-group">
@@ -47,12 +47,34 @@
               <img id="previewImage" align='middle' src="{{ URL('/') }}/images/academyCourse/{{ $academyCourse->image }}" width="100px"  class="pt-3"/>
             </div>
           </div>
-          <input type="hidden" name="hidden_image" value="{{ $academyCourse->image }}">
         </div>
 
         <div class="form-group">
           <label class="text-dark" for="url">Url :</label>
-          <input type="text" class="form-control" name="url" value="{{ $academyCourse->url }}"/>
+          <input type="text" class="form-control" name="url" value="{{ old('url', $academyCourse->url) }}"/>
+        </div>
+
+        <hr>
+        <div class="form-group">
+          <label class="text-dark" for="slider_heading">Home Slider Heading :</label>
+          <input type="text" class="form-control" name="slider_heading" value="{{ old('slider_heading', $academyCourse->slider_heading) }}"/>
+        </div>
+
+        <div class="form-group">
+          <label class="text-dark" for="slider_duration">Home Slider Duration :</label>
+          <input type="text" class="form-control" name="slider_duration" value="{{ old('slider_duration', $academyCourse->slider_duration) }}"/>
+        </div>
+
+        <div class="form-group">
+          <label class="text-dark" for="banner_image">Home Slider Banner Image :</label>
+          <input type="file" class="form-control" name="banner_image"/>
+          @if($academyCourse->banner_image)
+          <div class="row">
+            <div class="col-md-3 pt-3">
+              <img src="{{ URL('/') }}/images/academyCourse/{{ $academyCourse->banner_image }}" width="140px">
+            </div>
+          </div>
+          @endif
         </div>
 
         <button type="submit" class="btn btn-primary">Update Content</button>

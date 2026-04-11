@@ -10,6 +10,7 @@ use App\Banner;
 use App\HomeContent;
 use App\HomeNotification;
 use App\DesktopMenuSection;
+use App\AcademyCourse;
 use App\FastForwardCourse;
 use App\Mail\QueryMail;
 use Mail;
@@ -33,8 +34,13 @@ class WelcomeController extends Controller
             ->orderBy('sort_order')
             ->orderBy('id')
             ->get();
+        $homeMainCourses = AcademyCourse::query()
+            ->whereNotNull('banner_image')
+            ->where('banner_image', '!=', '')
+            ->orderBy('id')
+            ->get();
 
-        return view('welcome', compact('pros','banners','homeContent','homeNotification','menus','desktopMenu', 'fastForwardCourses'));
+        return view('welcome', compact('pros','banners','homeContent','homeNotification','menus','desktopMenu', 'fastForwardCourses', 'homeMainCourses'));
     }
 
     /**
@@ -84,8 +90,13 @@ class WelcomeController extends Controller
             ->orderBy('sort_order')
             ->orderBy('id')
             ->get();
+        $homeMainCourses = AcademyCourse::query()
+            ->whereNotNull('banner_image')
+            ->where('banner_image', '!=', '')
+            ->orderBy('id')
+            ->get();
 
-        return view('welcome', compact('pros','banners','homeContent','homeNotification','menus','desktopMenu', 'fastForwardCourses'));
+        return view('welcome', compact('pros','banners','homeContent','homeNotification','menus','desktopMenu', 'fastForwardCourses', 'homeMainCourses'));
     }
 
     /**
