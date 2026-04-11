@@ -597,6 +597,7 @@
       body.home-welcome-page .home-course-carousel .slick-track {
         display: flex;
         align-items: stretch;
+        margin-top: -1%;
       }
 
       body.home-welcome-page .home-course-carousel .slick-slide {
