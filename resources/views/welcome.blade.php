@@ -590,7 +590,7 @@
 
       body.home-welcome-page .home-course-carousel .slick-list {
         margin: 0;
-        padding: 3px 0;
+        padding: 3px 0 8px;
         box-sizing: border-box;
       }
 
@@ -668,7 +668,7 @@
         border-radius: 999px;
         background: linear-gradient(90deg, #9ccd63 0%, #86c354 45%, #7cbf51 100%);
         color: #ffffff;
-        font-family: 'Roboto-Bold';
+        font-family: inherit;
         font-size: clamp(10px, 0.66vw, 12px);
         line-height: 1;
         letter-spacing: 0;
@@ -680,10 +680,10 @@
       body.home-welcome-page .course-image {
         flex: 1 1 auto;
         position: relative;
-        min-height: clamp(156px, 17.8vh, 220px);
+        min-height: clamp(148px, 16.9vh, 212px);
         height: auto;
         margin-bottom: 0;
-        margin-top: -12px;
+        margin-top: -10px;
         overflow: hidden;
         border-radius: 0;
         background: #eef2f7;
@@ -716,10 +716,10 @@
         overflow: hidden;
         margin: 0;
         margin-top: clamp(-58px, -4.3vw, -44px);
-        padding: 0 16px 16px;
+        padding: 0 16px 8px;
         color: #ffffff;
         font-weight: 700;
-        font-family: 'Roboto-Bold';
+        font-family: inherit;
         line-height: 1.18;
         letter-spacing: 0;
         text-align: center;
