@@ -37,6 +37,8 @@ class WelcomeController extends Controller
         $homeMainCourses = AcademyCourse::query()
             ->whereNotNull('banner_image')
             ->where('banner_image', '!=', '')
+            ->whereNotNull('slider_heading')
+            ->where('slider_heading', '!=', '')
             ->orderBy('id')
             ->get();
 
@@ -93,6 +95,8 @@ class WelcomeController extends Controller
         $homeMainCourses = AcademyCourse::query()
             ->whereNotNull('banner_image')
             ->where('banner_image', '!=', '')
+            ->whereNotNull('slider_heading')
+            ->where('slider_heading', '!=', '')
             ->orderBy('id')
             ->get();
 

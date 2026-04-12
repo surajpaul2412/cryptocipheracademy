@@ -655,6 +655,28 @@
         font-family: inherit;
       }
 
+      body.home-welcome-page .home-course-badge {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        z-index: 3;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        max-width: calc(100% - 24px);
+        padding: 6px 14px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #9ccd63 0%, #86c354 45%, #7cbf51 100%);
+        color: #ffffff;
+        font-family: 'Roboto-Bold';
+        font-size: clamp(10px, 0.66vw, 12px);
+        line-height: 1;
+        letter-spacing: 0;
+        text-align: center;
+        white-space: nowrap;
+        box-shadow: 0 8px 18px rgba(124, 191, 81, 0.28);
+      }
+
       body.home-welcome-page .course-image {
         flex: 1 1 auto;
         position: relative;
@@ -1000,6 +1022,14 @@
         border-radius: 10px;
         padding: 0;
         gap: 0;
+      }
+
+      body.home-welcome-page .home-course-badge {
+        top: 10px;
+        right: 10px;
+        max-width: calc(100% - 20px);
+        padding: 5px 11px;
+        font-size: 10px;
       }
 
       body.home-welcome-page .course-image {
@@ -1628,10 +1658,10 @@
                       });
 
                       $homeMainCourseSlides = collect($homeMainCourses ?? [])->filter(function ($row) {
-                          return !empty($row->banner_image);
+                          return !empty($row->banner_image) && !empty($row->slider_heading);
                       })->map(function ($row) {
                           return [
-                              'title' => trim($row->slider_heading ?: $row->heading),
+                              'title' => trim($row->slider_heading),
                               'image' => URL('/') . '/images/academyCourse/' . $row->banner_image,
                               'duration' => $row->slider_duration ?: 'Main Course',
                               'link' => trim((string) $row->url) !== ''
@@ -1661,6 +1691,7 @@
                       <div class="card home-course-slide" style="width:100%;">
                           <a href="{{ $slide['link'] }}" class="home-course-card-shell">
                             <div class="home-course-card-content">
+                            <span class="home-course-badge">{{ $slide['duration'] }}</span>
                             <div class="course-image">
                               <img src="{{ $slide['image'] }}" alt="{{ $slide['title'] }}">
                             </div>
