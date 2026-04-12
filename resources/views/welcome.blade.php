@@ -73,7 +73,7 @@
           background-image: linear-gradient(to right, #edeef3 , #f4f5f9);
           border: 1px solid rgba(255,255,255,0.3);
           font-size: 12px;
-          font-family: 'Roboto-Bold';
+          font-family: inherit;
           font-weight: bold;
           text-align: center;
           color: #5b5e65;
@@ -180,7 +180,7 @@
           background-image: linear-gradient(to right, #edeef3 , #f4f5f9);
           border: 1px solid rgba(255,255,255,0.3);
           font-size: 14px;
-          font-family: 'Roboto-Bold';
+          font-family: inherit;
           font-weight: bold;
           text-align: center;
           padding: 5px 0px;
@@ -620,7 +620,7 @@
         height: 100% !important;
         max-height: none;
         display: block !important;
-        overflow: hidden;
+        overflow: visible;
         padding: 0 !important;
         border: 0;
         background: transparent;
@@ -633,11 +633,12 @@
         display: block;
         color: inherit;
         text-decoration: none;
-        /* border-radius: 16px; */
         overflow: hidden;
-        background: linear-gradient(180deg, #ffffff 0%, #f6f8fb 100%);
-        /* border: 1px solid rgba(22, 31, 45, 0.08); */
-        /* box-shadow: 0 10px 22px rgba(18, 28, 45, 0.08); */
+        border-radius: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        padding: 4px;
+        background-image: linear-gradient(to bottom right, #edeef3, #f2f3f7);
+        box-shadow: 2px 2px 4px 0 rgba(50, 50, 50, 0.10), -2px -2px 3px 0 rgba(255, 255, 255, 0.8);
         transition: transform 0.25s ease, box-shadow 0.25s ease;
       }
 
@@ -646,19 +647,35 @@
         height: 100%;
         display: flex;
         flex-direction: column;
-        padding: 5px 6px;
+        position: relative;
+        overflow: hidden;
+        border-radius: 14px;
+        padding: 0;
         gap: 0;
-        font-family: 'Roboto-Regular';
+        font-family: inherit;
       }
 
       body.home-welcome-page .course-image {
         flex: 1 1 auto;
-        min-height: clamp(116px, 13.8vh, 168px);
+        position: relative;
+        min-height: clamp(156px, 17.8vh, 220px);
         height: auto;
         margin-bottom: 0;
+        margin-top: -12px;
         overflow: hidden;
-        border-radius: 12px;
+        border-radius: 0;
         background: #eef2f7;
+      }
+
+      body.home-welcome-page .course-image::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 42%;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0));
+        pointer-events: none;
       }
 
       body.home-welcome-page .course-image img {
@@ -669,20 +686,25 @@
       }
 
       body.home-welcome-page .course-title {
-        font-size: clamp(13px, 0.98vw, 18px);
+        font-size: clamp(13px, 0.58vw, 18px);
         flex: 0 0 auto;
         display: flex;
-        align-items: center;
+        align-items: flex-end;
         justify-content: center;
         overflow: hidden;
         margin: 0;
-        padding: 8px 0;
-        color: #1f2733;
+        margin-top: clamp(-58px, -4.3vw, -44px);
+        padding: 0 16px 16px;
+        color: #ffffff;
         font-weight: 700;
         font-family: 'Roboto-Bold';
         line-height: 1.18;
-        letter-spacing: -0.02em;
+        letter-spacing: 0;
         text-align: center;
+        font-style: normal;
+        position: relative;
+        z-index: 2;
+        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7), 0 8px 20px rgba(0, 0, 0, 0.45);
       }
 
       body.home-welcome-page .course-description {
@@ -707,21 +729,32 @@
         border-top: 1px solid rgba(22, 31, 45, 0.09);
       }
 
+      body.home-welcome-page .home-course-card-content .course-footer,
+      body.home-welcome-page .home-course-card-content .duration,
+      body.home-welcome-page .home-course-card-content .home-course-details-link {
+        display: none !important;
+      }
+
       body.home-welcome-page .duration {
-        font-weight: 700;
+        font-weight: 400;
         color: #303846;
-        font-family: 'Roboto-Regular';
+        font-family: inherit;
+        letter-spacing: 0;
+        font-style: normal;
       }
 
       body.home-welcome-page .home-course-details-link {
-        font-weight: 700;
+        font-weight: 400;
         color: #1f2733;
-        letter-spacing: 0.14em;
-        font-family: 'Roboto-Bold';
+        letter-spacing: 0;
+        font-family: inherit;
       }
 
       body.home-welcome-page .details-link {
-        font-family: 'Roboto-Bold';
+        font-family: inherit;
+        font-style: normal;
+        letter-spacing: 0;
+        text-transform: none;
       }
 
       body.home-welcome-page .home-course-card-content .course-footer > a.details-link:not(.home-course-details-link) {
@@ -943,7 +976,7 @@
         width: 100% !important;
         height: auto !important;
         max-height: none;
-        overflow: hidden;
+        overflow: visible;
         background: transparent;
         box-shadow: none;
       }
@@ -951,27 +984,46 @@
       body.home-welcome-page .home-course-card-shell {
         display: block;
         width: 100%;
-        border-radius: 16px;
         height: 100%;
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        padding: 4px;
+        background-image: linear-gradient(to bottom right, #edeef3, #f2f3f7);
+        box-shadow: 2px 2px 4px 0 rgba(50, 50, 50, 0.10), -2px -2px 3px 0 rgba(255, 255, 255, 0.8);
       }
 
       body.home-welcome-page .home-course-card-content {
         width: 100%;
-        padding: 9px 8px 10px;
-        gap: 0;
         height: 100%;
+        position: relative;
+        overflow: hidden;
+        border-radius: 10px;
+        padding: 0;
+        gap: 0;
       }
 
       body.home-welcome-page .course-image {
         position: relative;
         display: block;
         width: 100%;
-        height: clamp(92px, 28vw, 128px);
-        min-height: 92px;
-        max-height: 128px;
-        border-radius: 12px;
+        height: clamp(116px, 34vw, 160px);
+        min-height: 116px;
+        max-height: 160px;
+        margin-top: -8px;
+        border-radius: 0;
         overflow: hidden;
         background: #eef2f7;
+      }
+
+      body.home-welcome-page .course-image::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 44%;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0));
+        pointer-events: none;
       }
 
       body.home-welcome-page .course-image img {
@@ -983,37 +1035,29 @@
       }
 
       body.home-welcome-page .course-title {
-        font-size: clamp(0.82rem, 3.2vw, 1rem);
-        line-height: 1.24;
-        min-height: 2.48em;
-        margin-top: 8px;
+        font-size: clamp(0.82rem, 3vw, 0.98rem);
+        line-height: 1.18;
+        min-height: 0;
+        margin-top: -42px;
         margin-bottom: 0;
         overflow-wrap: anywhere;
         word-break: break-word;
         text-align: center;
+        color: #ffffff;
+        padding: 0 10px 12px;
+        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.72), 0 8px 20px rgba(0, 0, 0, 0.45);
       }
 
       body.home-welcome-page .course-footer {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        padding-top: 8px;
-        gap: 8px;
+        display: none;
       }
 
       body.home-welcome-page .duration {
-        display: block;
-        width: 100%;
-        text-align: center;
-        white-space: nowrap;
+        display: none;
       }
 
       body.home-welcome-page .home-course-details-link {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        align-self: center;
+        display: none;
       }
 
       body.home-welcome-page .duration,
@@ -1615,19 +1659,14 @@
                     <div class="carousel-home w-100 home-course-carousel">
                       @foreach($homeSliderCourses as $slide)
                       <div class="card home-course-slide" style="width:100%;">
-                          <div class="home-course-card-shell">
-                            <div class="home-course-card-content" style="box-shadow: 2px 2px 2px 0 rgba(87, 87, 87, 0.1), 0 0 5px 0 rgba(255, 255, 255, 0.8);border: 1px solid rgba(87, 87, 87, 0.1);">
+                          <a href="{{ $slide['link'] }}" class="home-course-card-shell">
+                            <div class="home-course-card-content">
                             <div class="course-image">
                               <img src="{{ $slide['image'] }}" alt="{{ $slide['title'] }}">
                             </div>
                             <h3 class="course-title">{{ $slide['title'] }}</h3>
-                            <div class="course-footer">
-                              <span class="duration">({{ $slide['duration'] }})</span>
-                              <a href="{{ $slide['link'] }}" class="details-link home-course-details-link">DETAILS &rarr;</a>
-                              <a href="/our-courses" class="details-link">DETAILS →</a>
-                            </div>
                           </div>
-                          </div>
+                          </a>
                       </div>
                       @if(false)
                       <div class="card px-1 d-flex align-items-center justify-content-center home-course-slide" style="width:100%;">
