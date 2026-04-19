@@ -716,8 +716,8 @@
         overflow: hidden;
         margin: 0;
         margin-top: clamp(-58px, -4.3vw, -44px);
-        padding: 0 16px 8px;
         color: #ffffff;
+        padding: 0 16px 8px;
         font-weight: 700;
         font-family: inherit;
         line-height: 1.18;
@@ -1017,6 +1017,8 @@
       body.home-welcome-page .home-course-card-content {
         width: 100%;
         height: 100%;
+        display: flex;
+        flex-direction: column;
         position: relative;
         overflow: hidden;
         border-radius: 10px;
@@ -1025,35 +1027,25 @@
       }
 
       body.home-welcome-page .home-course-badge {
-        top: 10px;
-        right: 10px;
-        max-width: calc(100% - 20px);
-        padding: 5px 11px;
-        font-size: 10px;
+        display: none;
       }
 
       body.home-welcome-page .course-image {
+        order: 1;
         position: relative;
         display: block;
         width: 100%;
         height: clamp(116px, 34vw, 160px);
         min-height: 116px;
         max-height: 160px;
-        margin-top: -8px;
+        margin-top: 0;
         border-radius: 0;
         overflow: hidden;
         background: #eef2f7;
       }
 
       body.home-welcome-page .course-image::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        height: 44%;
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0));
-        pointer-events: none;
+        display: none;
       }
 
       body.home-welcome-page .course-image img {
@@ -1065,17 +1057,18 @@
       }
 
       body.home-welcome-page .course-title {
+        order: 2;
         font-size: clamp(0.82rem, 3vw, 0.98rem);
         line-height: 1.18;
-        min-height: 0;
-        margin-top: -42px;
+        min-height: 2.36em;
+        margin-top: 10px;
         margin-bottom: 0;
         overflow-wrap: anywhere;
         word-break: break-word;
         text-align: center;
-        color: #ffffff;
+        color: #1f2733;
         padding: 0 10px 12px;
-        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.72), 0 8px 20px rgba(0, 0, 0, 0.45);
+        text-shadow: none;
       }
 
       body.home-welcome-page .course-footer {
